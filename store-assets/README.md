@@ -45,6 +45,6 @@ previews. Listing images are not included in the extension ZIP.
 
 ## Store icon
 
-Run `npm run store:icon` to generate `src/icons/icon128.png`. It centers Saf0o's
+`src/icons/icon128.png` comes from the saf0o desktop repo (`node scripts/generate-companion-icons.mjs`). It centers Saf0o's
 artwork in Chrome's 96px safe area on a transparent 128px canvas.
 This padding applies only to the store icon. The desktop icon stays unchanged.

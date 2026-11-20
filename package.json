@@ -30,6 +30,7 @@
     "sbom:verify": "node scripts/verify-sbom.mjs",
     "build": "npm run brand:verify && rimraf ./dist && webpack --config webpack.config.js && node ./src/copy-static.js",
     "build:firefox": "npm run build && node scripts/build-firefox.mjs && node scripts/verify-dist.mjs dist-firefox firefox",
+    "package:firefox:xpi": "npm run build:firefox && mkdir -p artifacts && rm -f artifacts/saf0o-companion.xpi && cd dist-firefox && zip -X -q -r ../artifacts/saf0o-companion.xpi .",
     "bundle": "webpack --config webpack.config.js",
     "watch": "npm run build && webpack --config webpack.dev.config.js"
   },

@@ -37,7 +37,7 @@ function installLegacyProvider(target, provider) {
       : []
     const providers = uniqueProviders(provider, candidates)
 
-    // Make Wren the deterministic legacy provider.  EIP-6963 selection is
+    // Make Saf0o the deterministic legacy provider.  EIP-6963 selection is
     // not enough for explorers that later fall back to window.ethereum.
     Object.defineProperty(provider, 'providers', {
       value: providers,

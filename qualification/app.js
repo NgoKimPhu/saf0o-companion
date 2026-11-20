@@ -1,4 +1,4 @@
-const WREN_RDNS = 'io.github.ngokimphu.saf0o'
+const SAF0O_RDNS = 'io.github.ngokimphu.saf0o'
 
 let provider
 let account
@@ -65,7 +65,7 @@ function updateControls() {
     locked ||
     !(
       connected &&
-      globalThis.WrenQualificationTestnets.get(chainId) &&
+      globalThis.Saf0oQualificationTestnets.get(chainId) &&
       elements.confirmation.checked
     )
   elements.confirmation.disabled = locked
@@ -78,7 +78,7 @@ function updateControls() {
       if (pendingAction === action) {
         button.setAttribute(
           'aria-label',
-          'Waiting for Wren. Finish this request in Wren before trying again.'
+          'Waiting for Saf0o. Finish this request in Saf0o before trying again.'
         )
       } else {
         button.removeAttribute('aria-label')
@@ -90,7 +90,7 @@ function updateControls() {
 }
 
 async function refresh() {
-  if (!provider) throw new Error('Wren provider has not been discovered')
+  if (!provider) throw new Error('Saf0o provider has not been discovered')
   const [accounts, reportedChain] = await Promise.all([
     provider.request({ method: 'eth_accounts' }),
     provider.request({ method: 'eth_chainId' })
@@ -102,13 +102,13 @@ async function refresh() {
 }
 
 function attachProvider(detail) {
-  if (provider || detail?.info?.rdns !== WREN_RDNS || !detail.provider) return
+  if (provider || detail?.info?.rdns !== SAF0O_RDNS || !detail.provider) return
   provider = detail.provider
   elements.discovery.textContent = `${detail.info.name} (${detail.info.uuid})`
-  elements.transport.textContent = provider.isConnected?.() ? 'connected' : 'awaiting Wren'
+  elements.transport.textContent = provider.isConnected?.() ? 'connected' : 'awaiting Saf0o'
   elements.legacy.textContent =
     window.ethereum === provider
-      ? 'Wren owns window.ethereum'
+      ? 'Saf0o owns window.ethereum'
       : window.ethereum
         ? 'another provider retained'
         : 'not installed'
@@ -150,7 +150,7 @@ async function run(action) {
     return
   }
   if (pendingAction) return
-  if (!provider) throw new Error('Wren provider has not been discovered')
+  if (!provider) throw new Error('Saf0o provider has not been discovered')
 
   if (action === 'refresh') {
     pendingAction = action
@@ -179,7 +179,7 @@ async function run(action) {
       return
     }
     if (action === 'personal') {
-      const message = `Wren release qualification\nOrigin: ${location.origin}\nChain: ${chainId}`
+      const message = `Saf0o release qualification\nOrigin: ${location.origin}\nChain: ${chainId}`
       const encoded = `0x${[...new TextEncoder().encode(message)]
         .map((byte) => byte.toString(16).padStart(2, '0'))
         .join('')}`
@@ -192,8 +192,8 @@ async function run(action) {
     }
     if (action === 'typed') {
       const typedData = {
-        domain: { name: 'Wren qualification', version: '1', chainId },
-        message: { account, statement: 'I am testing a disposable Wren release candidate.' },
+        domain: { name: 'Saf0o qualification', version: '1', chainId },
+        message: { account, statement: 'I am testing a disposable Saf0o release candidate.' },
         primaryType: 'Qualification',
         types: {
           EIP712Domain: [
@@ -215,7 +215,7 @@ async function run(action) {
       return
     }
     if (action === 'transaction') {
-      const testnet = globalThis.WrenQualificationTestnets.get(chainId)
+      const testnet = globalThis.Saf0oQualificationTestnets.get(chainId)
       if (!testnet || !elements.confirmation.checked) {
         throw new Error(
           'An approved testnet and explicit disposable-account confirmation are required'
@@ -244,7 +244,7 @@ elements.confirmation.addEventListener('change', updateControls)
 window.dispatchEvent(new Event('eip6963:requestProvider'))
 setTimeout(() => {
   if (!provider) {
-    elements.discovery.textContent = 'Wren not announced'
-    record('Discovery', 'No Wren provider announced', 'error')
+    elements.discovery.textContent = 'Saf0o not announced'
+    record('Discovery', 'No Saf0o provider announced', 'error')
   }
 }, 1500)

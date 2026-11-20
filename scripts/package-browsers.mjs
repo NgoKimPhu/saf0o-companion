@@ -27,9 +27,9 @@ const dist = join(root, 'dist')
 const artifacts = join(root, 'artifacts')
 const staging = join(artifacts, `.staging-${process.pid}`)
 const version = packageJson.version
-const chromeArchive = join(artifacts, `wren-companion-${version}-chrome.zip`)
-const firefoxArchive = join(artifacts, `wren-companion-${version}-firefox.zip`)
-const sourceArchive = join(artifacts, `wren-companion-${version}-source.zip`)
+const chromeArchive = join(artifacts, `saf0o-companion-${version}-chrome.zip`)
+const firefoxArchive = join(artifacts, `saf0o-companion-${version}-firefox.zip`)
+const sourceArchive = join(artifacts, `saf0o-companion-${version}-source.zip`)
 const fixedTime = new Date('1980-01-01T00:00:00.000Z')
 
 await rm(artifacts, { recursive: true, force: true })
@@ -63,7 +63,7 @@ try {
     [
       'archive',
       '--format=zip',
-      `--prefix=wren-companion-${version}-source/`,
+      `--prefix=saf0o-companion-${version}-source/`,
       `--output=${sourceArchive}`,
       'HEAD'
     ],
@@ -81,13 +81,13 @@ const compatibilityArtifact = {
     commit: sourceCommit
   },
   browsers: {
-    chrome: `wren-companion-${version}-chrome.zip`,
-    firefox: `wren-companion-${version}-firefox.zip`,
-    firefoxReviewerSource: `wren-companion-${version}-source.zip`
+    chrome: `saf0o-companion-${version}-chrome.zip`,
+    firefox: `saf0o-companion-${version}-firefox.zip`,
+    firefoxReviewerSource: `saf0o-companion-${version}-source.zip`
   }
 }
 await writeFile(
-  join(artifacts, `wren-companion-${version}-compatibility.json`),
+  join(artifacts, `saf0o-companion-${version}-compatibility.json`),
   `${JSON.stringify(compatibilityArtifact, null, 2)}\n`,
   { mode: 0o600 }
 )

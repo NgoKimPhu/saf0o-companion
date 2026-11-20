@@ -14,9 +14,9 @@ test('normalizes desktop chain metadata to canonical RPC quantities', async () =
 
 test('preserves the full active-page origin, including a non-default port', async () => {
   const { parsePageOrigin } = await protocol
-  assert.deepEqual(parsePageOrigin('http://top.wren-demo.local:34987/path?q=1'), {
+  assert.deepEqual(parsePageOrigin('http://top.saf0o-demo.local:34987/path?q=1'), {
     protocol: 'http://',
-    origin: 'top.wren-demo.local:34987'
+    origin: 'top.saf0o-demo.local:34987'
   })
   assert.deepEqual(parsePageOrigin('https://app.example/path'), {
     protocol: 'https://',
@@ -43,12 +43,12 @@ test('accepts only bounded companion authentication state', async () => {
     parseAuthenticationState({
       status: 'upgrade-required',
       code: 'upgrade-required',
-      message: 'This version can’t verify Wren’s identity. Update the companion, then reconnect.'
+      message: 'This version can’t verify Saf0o’s identity. Update the companion, then reconnect.'
     }),
     {
       status: 'upgrade-required',
       code: 'upgrade-required',
-      message: 'This version can’t verify Wren’s identity. Update the companion, then reconnect.'
+      message: 'This version can’t verify Saf0o’s identity. Update the companion, then reconnect.'
     }
   )
   for (const value of [

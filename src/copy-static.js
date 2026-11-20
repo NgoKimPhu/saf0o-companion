@@ -8,8 +8,8 @@ const {
 } = require('../scripts/build-options.cjs')
 
 const projectRoot = path.join(__dirname, '..')
-const output = buildDirectory(projectRoot, process.env.WREN_BUILD_DIRECTORY)
-const desktopPort = parseDesktopPort(process.env.WREN_DESKTOP_PORT)
+const output = buildDirectory(projectRoot, process.env.SAF0O_BUILD_DIRECTORY)
+const desktopPort = parseDesktopPort(process.env.SAF0O_DESKTOP_PORT)
 
 mkdirSync(output, { recursive: true })
 for (const file of ['settings.html', 'icon.png']) {

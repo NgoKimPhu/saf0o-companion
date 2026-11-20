@@ -121,7 +121,7 @@ class AuthenticatedSocket {
       return
     }
     if (this.processing || (this.state !== 'challenge' && this.state !== 'response')) {
-      this.close(1002, 'Unexpected Wren authentication response')
+      this.close(1002, 'Unexpected Saf0o authentication response')
       return
     }
     const parsed = parseServerAuthMessage(event.data)
@@ -129,10 +129,10 @@ class AuthenticatedSocket {
       if (parsed.code === 'unsupported-version') {
         this.fail(
           'upgrade-required',
-          'This Companion version needs a newer Wren desktop to verify its identity. Update Wren, then reconnect.'
+          'This Companion version needs a newer Saf0o desktop to verify its identity. Update Saf0o, then reconnect.'
         )
       } else {
-        this.close(1002, 'Invalid Wren authentication response')
+        this.close(1002, 'Invalid Saf0o authentication response')
       }
       return
     }
@@ -144,7 +144,7 @@ class AuthenticatedSocket {
         if (message.code === 'unsupported-version') {
           this.fail(
             'upgrade-required',
-            'This Companion version needs a newer Wren desktop to verify its identity. Update Wren, then reconnect.'
+            'This Companion version needs a newer Saf0o desktop to verify its identity. Update Saf0o, then reconnect.'
           )
         } else {
           this.fail(message.code, message.message)
@@ -165,7 +165,7 @@ class AuthenticatedSocket {
             this.now()
           )
         ) {
-          this.close(1002, 'Wren authentication challenge mismatch')
+          this.close(1002, 'Saf0o authentication challenge mismatch')
           return
         }
         if (
@@ -174,7 +174,7 @@ class AuthenticatedSocket {
             this.bundle.desktop.fingerprint !== message.desktop.fingerprint ||
             !samePublicKey(this.bundle.desktop.publicKey, message.desktop.publicKey))
         ) {
-          this.fail('pinned-desktop-mismatch', 'The connected Wren identity changed')
+          this.fail('pinned-desktop-mismatch', 'The connected Saf0o identity changed')
           return
         }
         if (
@@ -185,13 +185,13 @@ class AuthenticatedSocket {
             this.cryptoApi.subtle
           ))
         ) {
-          this.close(1002, 'Invalid Wren desktop proof')
+          this.close(1002, 'Invalid Saf0o desktop proof')
           return
         }
         this.challenge = message
         if (!this.bundle.desktop) {
           if (this.channelRole !== 'control') {
-            this.fail('invalid-state', 'Pair Wren using the Companion control connection first')
+            this.fail('invalid-state', 'Pair Saf0o using the Companion control connection first')
             return
           }
           this.onStatus({
@@ -233,7 +233,7 @@ class AuthenticatedSocket {
           this.cryptoApi.subtle
         ))
       ) {
-        this.close(1002, 'Wren authentication acknowledgement mismatch')
+        this.close(1002, 'Saf0o authentication acknowledgement mismatch')
         return
       }
       if (!this.bundle.desktop) {
@@ -268,11 +268,11 @@ class AuthenticatedSocket {
       code,
       message
     })
-    this.close(1008, 'Wren authentication failed')
+    this.close(1008, 'Saf0o authentication failed')
   }
 
   send(value) {
-    if (this.readyState !== OPEN) throw new Error('Wren socket is not authenticated')
+    if (this.readyState !== OPEN) throw new Error('Saf0o socket is not authenticated')
     this.socket.send(value)
   }
 
@@ -303,7 +303,7 @@ class AuthenticatedSocket {
     this.clearDeadline()
     this.deadline = this.setTimer(() => {
       this.deadline = undefined
-      this.fail('authentication-timeout', 'Wren authentication timed out')
+      this.fail('authentication-timeout', 'Saf0o authentication timed out')
     }, delay)
   }
 

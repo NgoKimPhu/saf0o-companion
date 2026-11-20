@@ -27,10 +27,10 @@ const browserQualificationSource = fs.readFileSync(
 )
 const webpackSource = fs.readFileSync(path.join(root, 'webpack.config.js'), 'utf8')
 
-test('Companion shares Wren’s wallet canvas', () => {
-  assert.match(globalStyle, /--wren-bg-canvas:\s*#070907;/u)
-  assert.match(globalStyle, /body \{[\s\S]*background-color:\s*var\(--wren-bg-canvas\);/u)
-  assert.match(globalStyle, /url\('\.\/wren-grain\.svg'\)/u)
+test('Companion shares Saf0o’s wallet canvas', () => {
+  assert.match(globalStyle, /--saf0o-bg-canvas:\s*#070907;/u)
+  assert.match(globalStyle, /body \{[\s\S]*background-color:\s*var\(--saf0o-bg-canvas\);/u)
+  assert.match(globalStyle, /url\('\.\/saf0o-grain\.svg'\)/u)
   assert.match(globalStyle, /radial-gradient/u)
   assert.match(
     settingsSource,
@@ -64,8 +64,8 @@ test('popup bootstrap sizing does not depend on its provisional viewport', () =>
 })
 
 test('popup tabs are accepted only in isolated qualification builds', () => {
-  assert.match(backgroundSource, /globalThis\.__WREN_QUALIFICATION_POPUP_TAB__ === true/u)
-  assert.match(webpackSource, /process\.env\.WREN_QUALIFICATION_POPUP_TAB === '1'/u)
+  assert.match(backgroundSource, /globalThis\.__SAF0O_QUALIFICATION_POPUP_TAB__ === true/u)
+  assert.match(webpackSource, /process\.env\.SAF0O_QUALIFICATION_POPUP_TAB === '1'/u)
   assert.match(backgroundSource, /port\.sender\?\.id === chrome\.runtime\.id/u)
   assert.match(backgroundSource, /port\.sender\.url\.startsWith\(chrome\.runtime\.getURL\(''\)\)/u)
 })
@@ -236,7 +236,7 @@ test('identity reload writes the confirmed value only to the captured active doc
 test('packaged Firefox qualification operates the real action-popup identity controls', () => {
   assert.match(
     browserQualificationSource,
-    /async function qualifyFirefoxPackagedCore\([\s\S]*?firefoxOpenActionPopup[\s\S]*?firefoxWaitForActionPopup[\s\S]*?Switch to MetaMask[\s\S]*?Switch to Wren/u
+    /async function qualifyFirefoxPackagedCore\([\s\S]*?firefoxOpenActionPopup[\s\S]*?firefoxWaitForActionPopup[\s\S]*?Switch to MetaMask[\s\S]*?Switch to Saf0o/u
   )
   assert.match(browserQualificationSource, /competingMetaMaskWouldWinGenericSelection, false/u)
 })
@@ -254,12 +254,12 @@ test('tab refresh runs only in the captured document and is unavailable without 
 })
 
 test('uses a distinct warning role, readable accent focus, one styled ledger scrollbar, and truthful typography docs', () => {
-  assert.match(globalStyle, /--wren-focus-on-accent:\s*#111513;/u)
-  assert.match(globalStyle, /--wren-warning:\s*#ddb467;/u)
-  assert.match(globalStyle, /--wren-warning-soft:\s*#281f12;/u)
-  assert.match(settingsSource, /border-inline-start:\s*3px solid var\(--wren-warning\);/u)
-  assert.match(settingsSource, /background:\s*var\(--wren-warning-soft\);/u)
-  assert.match(settingsSource, /outline-color:\s*var\(--wren-focus-on-accent\);/u)
+  assert.match(globalStyle, /--saf0o-focus-on-accent:\s*#111513;/u)
+  assert.match(globalStyle, /--saf0o-warning:\s*#ddb467;/u)
+  assert.match(globalStyle, /--saf0o-warning-soft:\s*#281f12;/u)
+  assert.match(settingsSource, /border-inline-start:\s*3px solid var\(--saf0o-warning\);/u)
+  assert.match(settingsSource, /background:\s*var\(--saf0o-warning-soft\);/u)
+  assert.match(settingsSource, /outline-color:\s*var\(--saf0o-focus-on-accent\);/u)
   assert.match(settingsSource, /const ChainLedger = styled\.div`[\s\S]*scrollbar-width:\s*thin;/u)
   assert.doesNotMatch(globalStyle, /::-webkit-scrollbar/u)
   assert.match(

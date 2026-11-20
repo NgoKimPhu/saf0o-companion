@@ -20,10 +20,10 @@ import {
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const qualificationFailureDirectory = path.join(projectRoot, 'artifacts', 'qualification-failures')
-const qualificationExportDirectory = process.env.WREN_COMPANION_QUALIFICATION_EXPORT
-  ? path.resolve(process.env.WREN_COMPANION_QUALIFICATION_EXPORT)
+const qualificationExportDirectory = process.env.SAF0O_COMPANION_QUALIFICATION_EXPORT
+  ? path.resolve(process.env.SAF0O_COMPANION_QUALIFICATION_EXPORT)
   : undefined
-const storeDappUrl = process.env.WREN_COMPANION_STORE_DAPP_URL
+const storeDappUrl = process.env.SAF0O_COMPANION_STORE_DAPP_URL
 if (storeDappUrl) {
   assert.ok(qualificationExportDirectory, 'Store dapp capture requires a qualification export')
   const parsedStoreDappUrl = new URL(storeDappUrl)
@@ -79,12 +79,12 @@ function executable(candidates) {
 }
 
 function firefoxExecutable() {
-  return process.env.WREN_FIREFOX_BINARY || executable(['firefox'])
+  return process.env.SAF0O_FIREFOX_BINARY || executable(['firefox'])
 }
 
 function chromeExecutable() {
   return (
-    process.env.WREN_CHROME_BINARY ||
+    process.env.SAF0O_CHROME_BINARY ||
     executable(['chrome', 'google-chrome', 'google-chrome-stable', 'chromium'])
   )
 }
@@ -148,7 +148,7 @@ class QualificationSite {
     })
     this.port = this.server.address().port
     const hostname = qualificationExportDirectory
-      ? `${this.kind === 'top' ? 'dapp' : 'frame'}.wren-demo.local`
+      ? `${this.kind === 'top' ? 'dapp' : 'frame'}.saf0o-demo.local`
       : '127.0.0.1'
     this.origin = `http://${hostname}:${this.port}`
   }
@@ -180,7 +180,7 @@ if (window.ethereum) {
     enumerable: true
   });
 }
-globalThis.__wren = {
+globalThis.__saf0o = {
   announcements: [],
   results: [],
   accountChanges: [],
@@ -188,22 +188,22 @@ globalThis.__wren = {
   loadToken: Math.random().toString(36).slice(2) + Date.now()
 };
 function report(value) {
-  globalThis.__wren.results.push(value);
+  globalThis.__saf0o.results.push(value);
   fetch('/report', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(value) });
 }
 window.addEventListener('eip6963:announceProvider', async (event) => {
   if (event.detail?.info?.rdns !== 'io.github.ngokimphu.saf0o') return;
   const info = event.detail.info;
-  globalThis.__wren.announcements.push({ name: info.name, rdns: info.rdns, uuid: info.uuid });
-  if (globalThis.__wren.provider !== event.detail.provider) {
+  globalThis.__saf0o.announcements.push({ name: info.name, rdns: info.rdns, uuid: info.uuid });
+  if (globalThis.__saf0o.provider !== event.detail.provider) {
     event.detail.provider.on('accountsChanged', (accounts) => {
-      globalThis.__wren.accountChanges.push(accounts);
+      globalThis.__saf0o.accountChanges.push(accounts);
     });
     event.detail.provider.on('chainChanged', (chainId) => {
-      globalThis.__wren.chainChanges.push(chainId);
+      globalThis.__saf0o.chainChanges.push(chainId);
     });
   }
-  globalThis.__wren.provider = event.detail.provider;
+  globalThis.__saf0o.provider = event.detail.provider;
   if (!${JSON.stringify(activateProvider)}) {
     report({ kind: '${this.kind}', type: 'announced', info: { name: info.name, rdns: info.rdns } });
     return;
@@ -215,18 +215,18 @@ window.addEventListener('eip6963:announceProvider', async (event) => {
     report({ kind: '${this.kind}', type: 'error', message: error?.message || String(error) });
   }
 });
-globalThis.__wren.selectExplorerProvider = async (requiredChainId = '0x2105') => {
+globalThis.__saf0o.selectExplorerProvider = async (requiredChainId = '0x2105') => {
   const legacy = window.ethereum;
   const legacyCandidates = Array.isArray(legacy?.providers) ? legacy.providers : [legacy];
-  const provider = globalThis.__wren.provider;
+  const provider = globalThis.__saf0o.provider;
   const incumbent = legacyCandidates.find(
     (candidate) => candidate !== provider && candidate?.isMetaMask === true
   );
   if (!provider || !incumbent || typeof provider.enable !== 'function') {
-    throw new Error('No EIP-6963-selected BaseScan/Etherscan-compatible Wren provider is available');
+    throw new Error('No EIP-6963-selected BaseScan/Etherscan-compatible Saf0o provider is available');
   }
   if (legacy !== provider || typeof legacy.enable !== 'function') {
-    throw new Error('The selected Wren provider is not the deterministic legacy provider');
+    throw new Error('The selected Saf0o provider is not the deterministic legacy provider');
   }
   const chainBefore = await legacy.request({ method: 'eth_chainId' });
   if (chainBefore !== requiredChainId) {
@@ -237,10 +237,10 @@ globalThis.__wren.selectExplorerProvider = async (requiredChainId = '0x2105') =>
   }
   const chainAfter = await legacy.request({ method: 'eth_chainId' });
   if (chainAfter !== requiredChainId) {
-    throw new Error('The selected Wren provider did not switch to the explorer network');
+    throw new Error('The selected Saf0o provider did not switch to the explorer network');
   }
   return {
-    selectedAnnouncement: provider === globalThis.__wren.provider,
+    selectedAnnouncement: provider === globalThis.__saf0o.provider,
     selectedLegacyProvider: legacy === provider && legacyCandidates.includes(provider),
     competingMetaMaskWouldWinGenericSelection:
       legacyCandidates.find((candidate) => candidate?.isMetaMask === true) === incumbent,
@@ -250,9 +250,9 @@ globalThis.__wren.selectExplorerProvider = async (requiredChainId = '0x2105') =>
   };
 };
 window.addEventListener('message', async (event) => {
-  if (event.data !== 'wren:chain') return;
-  const chainId = await globalThis.__wren.provider.request({ method: 'eth_chainId' });
-  event.source.postMessage({ type: 'wren:chain', chainId, origin: location.origin }, '*');
+  if (event.data !== 'saf0o:chain') return;
+  const chainId = await globalThis.__saf0o.provider.request({ method: 'eth_chainId' });
+  event.source.postMessage({ type: 'saf0o:chain', chainId, origin: location.origin }, '*');
 });
 window.dispatchEvent(new Event('eip6963:requestProvider'));
 </script></head><body>${isTop ? `<iframe src="${frameOrigin}/"></iframe>` : 'frame'}</body></html>`
@@ -294,14 +294,14 @@ async function buildExtension(directory, desktopPort, browser) {
     path.join(projectRoot, 'node_modules', '.bin', 'webpack'),
     ['--config', 'webpack.config.js'],
     {
-      WREN_BUILD_DIRECTORY: directory,
-      WREN_DESKTOP_PORT: String(desktopPort),
-      WREN_QUALIFICATION_POPUP_TAB: '1'
+      SAF0O_BUILD_DIRECTORY: directory,
+      SAF0O_DESKTOP_PORT: String(desktopPort),
+      SAF0O_QUALIFICATION_POPUP_TAB: '1'
     }
   )
   run(process.execPath, [path.join(projectRoot, 'src', 'copy-static.js')], {
-    WREN_BUILD_DIRECTORY: directory,
-    WREN_DESKTOP_PORT: String(desktopPort)
+    SAF0O_BUILD_DIRECTORY: directory,
+    SAF0O_DESKTOP_PORT: String(desktopPort)
   })
   if (browser === 'firefox') {
     const manifestPath = path.join(directory, 'manifest.json')
@@ -314,7 +314,7 @@ async function buildExtension(directory, desktopPort, browser) {
   assert.match(manifest, new RegExp(`127\\.0\\.0\\.1:${desktopPort}`, 'u'))
   assert.doesNotMatch(index, /127\.0\.0\.1:1248/u)
   assert.doesNotMatch(manifest, /127\.0\.0\.1:1248/u)
-  assert.match(index, /wren-companion-auth-v3/u)
+  assert.match(index, /saf0o-companion-auth-v3/u)
   assert.doesNotMatch(index, /frame-extension-auth-v2/u)
 }
 
@@ -323,7 +323,7 @@ async function extractPackagedExtension(directory, browser) {
   const archive = path.join(
     projectRoot,
     'artifacts',
-    `wren-companion-${packageJson.version}-${browser}.zip`
+    `saf0o-companion-${packageJson.version}-${browser}.zip`
   )
   try {
     await access(archive)
@@ -338,7 +338,7 @@ async function extractPackagedExtension(directory, browser) {
   const manifest = await readFile(path.join(directory, 'manifest.json'), 'utf8')
   assert.match(index, /127\.0\.0\.1:1248/u)
   assert.match(manifest, /127\.0\.0\.1:1248/u)
-  assert.match(index, /wren-companion-auth-v3/u)
+  assert.match(index, /saf0o-companion-auth-v3/u)
 }
 
 function assertProtocol3Authentication(desktop, browser, fingerprint) {
@@ -655,7 +655,7 @@ async function firefoxActionPopupEvaluate(marionette, extensionId, expression) {
               'removeMessageListener(' + JSON.stringify(request) + ', handler);' +
               'try {' +
                 'const sandbox = new Cu.Sandbox(content, {' +
-                  'sandboxName: "Wren Companion qualification",' +
+                  'sandboxName: "Saf0o Companion qualification",' +
                   'sandboxPrototype: content,' +
                   'wantXrays: false' +
                 '});' +
@@ -847,7 +847,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
       ...(qualificationExportDirectory
         ? [
             '--force-device-scale-factor=1',
-            '--host-resolver-rules=MAP dapp.wren-demo.local 127.0.0.1, MAP frame.wren-demo.local 127.0.0.1',
+            '--host-resolver-rules=MAP dapp.saf0o-demo.local 127.0.0.1, MAP frame.saf0o-demo.local 127.0.0.1',
             ...(storeDappUrl ? ['--disable-http2', '--disable-quic'] : ['--no-proxy-server'])
           ]
         : []),
@@ -898,7 +898,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
         kind: 'top',
         type: 'ready',
         chainId: '0x1',
-        info: { name: 'Wren', rdns: 'io.github.ngokimphu.saf0o' }
+        info: { name: 'Saf0o', rdns: 'io.github.ngokimphu.saf0o' }
       }
     )
     assert.equal(frame.reports.find(({ type }) => type === 'ready')?.chainId, '0x2')
@@ -930,7 +930,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
     desktop.closePageConnections()
     await waitFor(() => pageAuthentications() >= beforeReconnect + 2, 'page transport reconnect')
     const chainId = await page.evaluate(
-      `globalThis.__wren.provider.request({ method: 'eth_chainId' })`
+      `globalThis.__saf0o.provider.request({ method: 'eth_chainId' })`
     )
     assert.equal(chainId, '0x1')
     await waitFor(
@@ -941,12 +941,12 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
       'Chrome account subscription'
     )
     assert.deepEqual(
-      await page.evaluate(`globalThis.__wren.provider.request({ method: 'eth_accounts' })`),
+      await page.evaluate(`globalThis.__saf0o.provider.request({ method: 'eth_accounts' })`),
       []
     )
-    assert.deepEqual(await page.evaluate(`globalThis.__wren.accountChanges`), [])
+    assert.deepEqual(await page.evaluate(`globalThis.__saf0o.accountChanges`), [])
     const requestCountBeforeLegacyEnable = desktop.requests.length
-    const explorerSelection = await page.evaluate(`globalThis.__wren.selectExplorerProvider()`)
+    const explorerSelection = await page.evaluate(`globalThis.__saf0o.selectExplorerProvider()`)
     assert.equal(explorerSelection.selectedAnnouncement, true)
     assert.equal(explorerSelection.selectedLegacyProvider, true)
     assert.equal(explorerSelection.competingMetaMaskWouldWinGenericSelection, false)
@@ -954,13 +954,13 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
     assert.equal(explorerSelection.chainAfter, '0x2105')
     const enabledAccounts = explorerSelection.accounts
     assert.deepEqual(enabledAccounts, ['0x0000000000000000000000000000000000000001'])
-    await page.waitFor(`globalThis.__wren.accountChanges.length === 1`)
-    assert.deepEqual(await page.evaluate(`globalThis.__wren.accountChanges`), [enabledAccounts])
-    assert.deepEqual(await page.evaluate(`globalThis.__wren.chainChanges`), ['0x2105'])
+    await page.waitFor(`globalThis.__saf0o.accountChanges.length === 1`)
+    assert.deepEqual(await page.evaluate(`globalThis.__saf0o.accountChanges`), [enabledAccounts])
+    assert.deepEqual(await page.evaluate(`globalThis.__saf0o.chainChanges`), ['0x2105'])
     assertExplorerConnectionRequests(
       desktop.requests.slice(requestCountBeforeLegacyEnable),
       top.origin,
-      'Chrome Wren identity'
+      'Chrome Saf0o identity'
     )
 
     const authenticatedExtensionId = desktop.authentications.find(
@@ -990,7 +990,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
     await settings.close()
     await cdp.send('Page.navigate', { url: `${top.origin}/?idle=1` }, page.sessionId)
     await page.waitFor(
-      `location.search === '?idle=1' && globalThis.__wren?.announcements.length > 0`
+      `location.search === '?idle=1' && globalThis.__saf0o?.announcements.length > 0`
     )
     settings = await openChromePopup(cdp, workerTarget.sessionId, extensionId, 'idle connected tab')
     await settings.waitFor(
@@ -1066,7 +1066,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
     await cdp.send('Target.activateTarget', { targetId: page.targetId })
     settings = await openChromePopup(cdp, workerTarget.sessionId, extensionId, 'cached networks')
     await settings.waitFor(
-      `document.body.textContent.includes('Wren could not refresh its available networks.') && document.querySelectorAll('[data-chain-id]').length === 19`,
+      `document.body.textContent.includes('Saf0o could not refresh its available networks.') && document.querySelectorAll('[data-chain-id]').length === 19`,
       15_000
     )
     await assertRefreshWarningRole((expression) => settings.evaluate(expression), 'Chrome')
@@ -1076,7 +1076,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
       `[...document.querySelectorAll('button')].find((button) => button.textContent.trim() === 'Refresh networks').click()`
     )
     await settings.waitFor(
-      `!document.body.textContent.includes('Wren could not refresh its available networks.')`
+      `!document.body.textContent.includes('Saf0o could not refresh its available networks.')`
     )
     desktop.availableChains = []
     await cdp.send(
@@ -1098,16 +1098,16 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
       `[...document.querySelectorAll('[role="radio"]')].find((control) => control.textContent.trim() === 'MetaMask').click()`
     )
     await settings.waitFor(`document.querySelector('[role="alertdialog"]')`)
-    const capturedDocumentToken = await page.evaluate(`globalThis.__wren.loadToken`)
+    const capturedDocumentToken = await page.evaluate(`globalThis.__saf0o.loadToken`)
     await cdp.send(
       'Page.navigate',
       { url: `${top.origin}/?idle=1&replacement-document=1` },
       page.sessionId
     )
     await page.waitFor(
-      `document.readyState === 'complete' && globalThis.__wren?.loadToken !== ${JSON.stringify(capturedDocumentToken)}`
+      `document.readyState === 'complete' && globalThis.__saf0o?.loadToken !== ${JSON.stringify(capturedDocumentToken)}`
     )
-    const replacementToken = await page.evaluate(`globalThis.__wren.loadToken`)
+    const replacementToken = await page.evaluate(`globalThis.__saf0o.loadToken`)
     await settings.evaluate(
       `[...document.querySelectorAll('button')].find((button) => button.textContent.trim() === 'Switch to MetaMask').click()`
     )
@@ -1118,7 +1118,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
       'Chrome document replacement does not write identity to the replacement document'
     )
     assert.equal(
-      await page.evaluate(`globalThis.__wren.loadToken`),
+      await page.evaluate(`globalThis.__saf0o.loadToken`),
       replacementToken,
       'Chrome document replacement does not reload the replacement document'
     )
@@ -1147,25 +1147,25 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
       'Chrome identity switch survives a same-document route change'
     )
     desktop.resetOrigin(top.origin)
-    const chromeWrenDocument = await page.evaluate(`globalThis.__wren.loadToken`)
+    const chromeSaf0oDocument = await page.evaluate(`globalThis.__saf0o.loadToken`)
     await settings.evaluate(
       `[...document.querySelectorAll('button')].find((button) => button.textContent.trim() === 'Switch to MetaMask').click()`
     )
     await page.waitFor(
-      `document.readyState === 'complete' && globalThis.__wren?.loadToken !== ${JSON.stringify(chromeWrenDocument)} && globalThis.__wren?.provider?.isWren !== true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === true`,
+      `document.readyState === 'complete' && globalThis.__saf0o?.loadToken !== ${JSON.stringify(chromeSaf0oDocument)} && globalThis.__saf0o?.provider?.isSaf0o !== true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === true`,
       30_000
     )
     const requestCountBeforeMetaMaskConnection = desktop.requests.length
     const chromeMetaMaskSelection = await page.evaluate(
-      `globalThis.__wren.selectExplorerProvider()`
+      `globalThis.__saf0o.selectExplorerProvider()`
     )
     assert.equal(chromeMetaMaskSelection.chainBefore, '0x1')
     assert.equal(chromeMetaMaskSelection.chainAfter, '0x2105')
     assert.deepEqual(chromeMetaMaskSelection.accounts, [
       '0x0000000000000000000000000000000000000001'
     ])
-    await page.waitFor(`globalThis.__wren.accountChanges.length === 1`)
-    assert.deepEqual(await page.evaluate(`globalThis.__wren.chainChanges`), ['0x2105'])
+    await page.waitFor(`globalThis.__saf0o.accountChanges.length === 1`)
+    assert.deepEqual(await page.evaluate(`globalThis.__saf0o.chainChanges`), ['0x2105'])
     assertExplorerConnectionRequests(
       desktop.requests.slice(requestCountBeforeMetaMaskConnection),
       top.origin,
@@ -1177,16 +1177,16 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
       `document.body.textContent.includes('Injecting as MetaMask') && !document.body.textContent.includes('Refresh this tab')`
     )
     if (!qualificationExportDirectory) {
-      const chromeMetaMaskDocument = await page.evaluate(`globalThis.__wren.loadToken`)
+      const chromeMetaMaskDocument = await page.evaluate(`globalThis.__saf0o.loadToken`)
       await settings.evaluate(
-        `[...document.querySelectorAll('[role="radio"]')].find((control) => control.textContent.trim() === 'Wren').click()`
+        `[...document.querySelectorAll('[role="radio"]')].find((control) => control.textContent.trim() === 'Saf0o').click()`
       )
       await settings.waitFor(`document.querySelector('[role="alertdialog"]')`)
       await settings.evaluate(
-        `[...document.querySelectorAll('button')].find((button) => button.textContent.trim() === 'Switch to Wren').click()`
+        `[...document.querySelectorAll('button')].find((button) => button.textContent.trim() === 'Switch to Saf0o').click()`
       )
       await page.waitFor(
-        `document.readyState === 'complete' && globalThis.__wren?.loadToken !== ${JSON.stringify(chromeMetaMaskDocument)} && globalThis.__wren?.provider?.isWren === true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === false`,
+        `document.readyState === 'complete' && globalThis.__saf0o?.loadToken !== ${JSON.stringify(chromeMetaMaskDocument)} && globalThis.__saf0o?.provider?.isSaf0o === true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === false`,
         30_000
       )
       await cdp.send('Target.activateTarget', { targetId: page.targetId })
@@ -1197,7 +1197,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
         'restored identity'
       )
       await settings.waitFor(
-        `document.body.textContent.includes('Injecting as Wren') && !document.body.textContent.includes('Refresh this tab')`
+        `document.body.textContent.includes('Injecting as Saf0o') && !document.body.textContent.includes('Refresh this tab')`
       )
     }
     if (qualificationExportDirectory) {
@@ -1207,7 +1207,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
         await cdp.send('Page.navigate', { url: storeDappUrl }, page.sessionId)
         await page.waitFor(`location.hostname === 'app.uniswap.org'`, 45_000)
         await page.evaluate(`new Promise((resolve, reject) => {
-          const timeout = setTimeout(() => reject(new Error('Wren provider announcement timed out')), 10000);
+          const timeout = setTimeout(() => reject(new Error('Saf0o provider announcement timed out')), 10000);
           const onProvider = async (event) => {
             if (event.detail?.info?.rdns !== 'io.github.ngokimphu.saf0o') return;
             window.removeEventListener('eip6963:announceProvider', onProvider);
@@ -1304,7 +1304,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
         .map(({ fingerprint }) => fingerprint)
     )
     const replacementDesktopFingerprint = await desktop.replaceDesktopIdentity()
-    await settings.waitFor(`document.body.textContent.includes('Wren identity changed')`)
+    await settings.waitFor(`document.body.textContent.includes('Saf0o identity changed')`)
     await settings.evaluate(`${buttonExpression}.click()`)
     const confirmedIdentityReset = `[...document.querySelectorAll('button')].find((button) => button.textContent.includes('Confirm reset and compare a new code'))`
     await settings.waitFor(confirmedIdentityReset)
@@ -1342,7 +1342,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
     await cdp.send('Target.activateTarget', { targetId: blank.targetId })
     settings = await openChromePopup(cdp, workerTarget.sessionId, extensionId, 'unsupported')
     await settings.waitFor(
-      `document.body.textContent.includes('This browser tab is not available to Wren.')`
+      `document.body.textContent.includes('This browser tab is not available to Saf0o.')`
     )
     await qualifyChromePopupLayout(settings, 'unsupported')
     await settings.close()
@@ -1444,7 +1444,7 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
       marionette,
       `document.querySelector('[data-document-target]')?.dataset.documentTarget`
     )
-    if (process.env.WREN_FIREFOX_REQUIRE_NONCE_FALLBACK === '1') {
+    if (process.env.SAF0O_FIREFOX_REQUIRE_NONCE_FALLBACK === '1') {
       assert.equal(
         firefoxDocumentTarget,
         'nonce',
@@ -1484,8 +1484,8 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     await marionette.request('WebDriver:SwitchToWindow', { handle: topHandle })
     await firefoxWaitFor(
       marionette,
-      `(window.wrappedJSObject || window).__wren?.provider`,
-      'Firefox top-level Wren provider'
+      `(window.wrappedJSObject || window).__saf0o?.provider`,
+      'Firefox top-level Saf0o provider'
     )
     await waitFor(
       () =>
@@ -1497,18 +1497,18 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     assert.deepEqual(
       await firefoxEvaluate(
         marionette,
-        `(window.wrappedJSObject || window).__wren.provider.request({ method: 'eth_accounts' })`
+        `(window.wrappedJSObject || window).__saf0o.provider.request({ method: 'eth_accounts' })`
       ),
       []
     )
     assert.deepEqual(
-      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__wren.accountChanges`),
+      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__saf0o.accountChanges`),
       []
     )
     const requestCountBeforeLegacyEnable = desktop.requests.length
     const explorerSelection = await firefoxEvaluate(
       marionette,
-      `(window.wrappedJSObject || window).__wren.selectExplorerProvider()`
+      `(window.wrappedJSObject || window).__saf0o.selectExplorerProvider()`
     )
     assert.equal(explorerSelection.selectedAnnouncement, true)
     assert.equal(explorerSelection.selectedLegacyProvider, true)
@@ -1519,21 +1519,21 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     assert.deepEqual(enabledAccounts, ['0x0000000000000000000000000000000000000001'])
     await firefoxWaitFor(
       marionette,
-      `(window.wrappedJSObject || window).__wren.accountChanges.length === 1`,
+      `(window.wrappedJSObject || window).__saf0o.accountChanges.length === 1`,
       'Firefox account grant event'
     )
     assert.deepEqual(
-      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__wren.accountChanges`),
+      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__saf0o.accountChanges`),
       [enabledAccounts]
     )
     assert.deepEqual(
-      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__wren.chainChanges`),
+      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__saf0o.chainChanges`),
       ['0x2105']
     )
     assertExplorerConnectionRequests(
       desktop.requests.slice(requestCountBeforeLegacyEnable),
       top.origin,
-      'Firefox Wren identity'
+      'Firefox Saf0o identity'
     )
     await marionette.request('WebDriver:SwitchToWindow', { handle: popupHandle })
     await firefoxWaitFor(
@@ -1576,7 +1576,7 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     await marionette.request('WebDriver:SwitchToWindow', { handle: popupHandle })
     await firefoxWaitFor(
       marionette,
-      `document.body.textContent.includes('Wren could not refresh its available networks.') && document.querySelectorAll('[data-chain-id]').length === 19`,
+      `document.body.textContent.includes('Saf0o could not refresh its available networks.') && document.querySelectorAll('[data-chain-id]').length === 19`,
       'Firefox network refresh error'
     )
     await assertRefreshWarningRole(
@@ -1594,7 +1594,7 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     await marionette.request('WebDriver:SwitchToWindow', { handle: popupHandle })
     await firefoxWaitFor(
       marionette,
-      `!document.body.textContent.includes('Wren could not refresh its available networks.')`,
+      `!document.body.textContent.includes('Saf0o could not refresh its available networks.')`,
       'Firefox network refresh recovery'
     )
     await firefoxEvaluate(
@@ -1620,9 +1620,9 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
       true,
       'Firefox identity switch survives a same-document route change'
     )
-    const firefoxWrenDocument = await firefoxEvaluate(
+    const firefoxSaf0oDocument = await firefoxEvaluate(
       marionette,
-      `(window.wrappedJSObject || window).__wren.loadToken`
+      `(window.wrappedJSObject || window).__saf0o.loadToken`
     )
     await marionette.request('WebDriver:SwitchToWindow', { handle: popupHandle })
     const selectedDappBehindPopup = await firefoxChromeEvaluate(
@@ -1652,13 +1652,13 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     await marionette.request('WebDriver:SwitchToWindow', { handle: topHandle })
     await firefoxWaitFor(
       marionette,
-      `document.readyState === 'complete' && (window.wrappedJSObject || window).__wren?.loadToken !== ${JSON.stringify(firefoxWrenDocument)} && (window.wrappedJSObject || window).__wren?.provider?.isWren !== true && (window.wrappedJSObject || window).__wren?.provider?.isConnected?.() === true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === true`,
+      `document.readyState === 'complete' && (window.wrappedJSObject || window).__saf0o?.loadToken !== ${JSON.stringify(firefoxSaf0oDocument)} && (window.wrappedJSObject || window).__saf0o?.provider?.isSaf0o !== true && (window.wrappedJSObject || window).__saf0o?.provider?.isConnected?.() === true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === true`,
       'Firefox identity switch reload'
     )
     const requestCountBeforeMetaMaskConnection = desktop.requests.length
     const firefoxMetaMaskSelection = await firefoxEvaluate(
       marionette,
-      `(window.wrappedJSObject || window).__wren.selectExplorerProvider()`
+      `(window.wrappedJSObject || window).__saf0o.selectExplorerProvider()`
     )
     assert.equal(firefoxMetaMaskSelection.chainBefore, '0x1')
     assert.equal(firefoxMetaMaskSelection.chainAfter, '0x2105')
@@ -1667,11 +1667,11 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     ])
     await firefoxWaitFor(
       marionette,
-      `(window.wrappedJSObject || window).__wren.accountChanges.length === 1`,
+      `(window.wrappedJSObject || window).__saf0o.accountChanges.length === 1`,
       'Firefox MetaMask-identity account grant event'
     )
     assert.deepEqual(
-      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__wren.chainChanges`),
+      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__saf0o.chainChanges`),
       ['0x2105']
     )
     assertExplorerConnectionRequests(
@@ -1681,7 +1681,7 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     )
     const firefoxMetaMaskDocument = await firefoxEvaluate(
       marionette,
-      `(window.wrappedJSObject || window).__wren.loadToken`
+      `(window.wrappedJSObject || window).__saf0o.loadToken`
     )
 
     const recoveryPopupWindow = await marionette.request('WebDriver:NewWindow', { type: 'tab' })
@@ -1702,14 +1702,14 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     )
     await firefoxEvaluate(
       marionette,
-      `(() => { [...document.querySelectorAll('[role="radio"]')].find((control) => control.textContent.trim() === 'Wren').click(); return true })()`
+      `(() => { [...document.querySelectorAll('[role="radio"]')].find((control) => control.textContent.trim() === 'Saf0o').click(); return true })()`
     )
     await firefoxWaitFor(
       marionette,
       `document.querySelector('[role="alertdialog"]')`,
-      'Firefox Wren identity confirmation'
+      'Firefox Saf0o identity confirmation'
     )
-    const selectedDappForWrenRestore = await firefoxChromeEvaluate(
+    const selectedDappForSaf0oRestore = await firefoxChromeEvaluate(
       marionette,
       `
         const window = Services.wm.getMostRecentWindow('navigator:browser');
@@ -1723,19 +1723,19 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
       [top.origin]
     )
     assert.equal(
-      selectedDappForWrenRestore,
+      selectedDappForSaf0oRestore,
       true,
-      'Firefox dapp tab remains active for Wren restore'
+      'Firefox dapp tab remains active for Saf0o restore'
     )
     await firefoxEvaluate(
       marionette,
-      `(() => { [...document.querySelectorAll('button')].find((button) => button.textContent.trim() === 'Switch to Wren').click(); return true })()`
+      `(() => { [...document.querySelectorAll('button')].find((button) => button.textContent.trim() === 'Switch to Saf0o').click(); return true })()`
     )
     await marionette.request('WebDriver:SwitchToWindow', { handle: topHandle })
     await firefoxWaitFor(
       marionette,
-      `document.readyState === 'complete' && (window.wrappedJSObject || window).__wren?.loadToken !== ${JSON.stringify(firefoxMetaMaskDocument)} && (window.wrappedJSObject || window).__wren?.provider?.isWren === true && (window.wrappedJSObject || window).__wren?.provider?.isConnected?.() === true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === false`,
-      'Firefox Wren identity restore reload'
+      `document.readyState === 'complete' && (window.wrappedJSObject || window).__saf0o?.loadToken !== ${JSON.stringify(firefoxMetaMaskDocument)} && (window.wrappedJSObject || window).__saf0o?.provider?.isSaf0o === true && (window.wrappedJSObject || window).__saf0o?.provider?.isConnected?.() === true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === false`,
+      'Firefox Saf0o identity restore reload'
     )
     const restoredPopupWindow = await marionette.request('WebDriver:NewWindow', { type: 'tab' })
     recoveryPopupHandle = restoredPopupWindow.value?.handle || restoredPopupWindow.handle
@@ -1750,7 +1750,7 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     await marionette.request('WebDriver:SwitchToWindow', { handle: recoveryPopupHandle })
     await firefoxWaitFor(
       marionette,
-      `document.body.textContent.includes('Injecting as Wren') && !document.body.textContent.includes('Refresh this tab')`,
+      `document.body.textContent.includes('Injecting as Saf0o') && !document.body.textContent.includes('Refresh this tab')`,
       'Firefox restored identity popup'
     )
 
@@ -1766,7 +1766,7 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
     await marionette.request('WebDriver:SwitchToWindow', { handle: recoveryPopupHandle })
     await firefoxWaitFor(
       marionette,
-      `document.body.textContent.includes('This browser tab is not available to Wren.')`,
+      `document.body.textContent.includes('This browser tab is not available to Saf0o.')`,
       'Firefox unsupported popup'
     )
     await qualifyFirefoxPopupLayout(marionette, 'unsupported')
@@ -1846,20 +1846,20 @@ async function qualifyFirefoxPackagedCore(root, extension, desktop, top, frame) 
     assertProtocol3Authentication(desktop, 'firefox')
     await firefoxWaitFor(
       marionette,
-      `(window.wrappedJSObject || window).__wren?.provider`,
-      'Firefox packaged Wren provider'
+      `(window.wrappedJSObject || window).__saf0o?.provider`,
+      'Firefox packaged Saf0o provider'
     )
     assert.deepEqual(
       await firefoxEvaluate(
         marionette,
-        `(window.wrappedJSObject || window).__wren.provider.request({ method: 'eth_accounts' })`
+        `(window.wrappedJSObject || window).__saf0o.provider.request({ method: 'eth_accounts' })`
       ),
       []
     )
     const requestCountBeforeLegacyEnable = desktop.requests.length
     const explorerSelection = await firefoxEvaluate(
       marionette,
-      `(window.wrappedJSObject || window).__wren.selectExplorerProvider()`
+      `(window.wrappedJSObject || window).__saf0o.selectExplorerProvider()`
     )
     assert.equal(explorerSelection.selectedAnnouncement, true)
     assert.equal(explorerSelection.selectedLegacyProvider, true)
@@ -1869,21 +1869,21 @@ async function qualifyFirefoxPackagedCore(root, extension, desktop, top, frame) 
     assert.deepEqual(explorerSelection.accounts, ['0x0000000000000000000000000000000000000001'])
     await firefoxWaitFor(
       marionette,
-      `(window.wrappedJSObject || window).__wren.accountChanges.length === 1`,
+      `(window.wrappedJSObject || window).__saf0o.accountChanges.length === 1`,
       'Firefox packaged account grant event'
     )
     assert.deepEqual(
-      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__wren.chainChanges`),
+      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__saf0o.chainChanges`),
       ['0x2105']
     )
     assertExplorerConnectionRequests(
       desktop.requests.slice(requestCountBeforeLegacyEnable),
       top.origin,
-      'Firefox packaged Wren identity'
+      'Firefox packaged Saf0o identity'
     )
-    const firefoxWrenDocument = await firefoxEvaluate(
+    const firefoxSaf0oDocument = await firefoxEvaluate(
       marionette,
-      `(window.wrappedJSObject || window).__wren.loadToken`
+      `(window.wrappedJSObject || window).__saf0o.loadToken`
     )
     await firefoxOpenActionPopup(marionette, installed.value)
     await firefoxWaitForActionPopup(
@@ -1932,13 +1932,13 @@ async function qualifyFirefoxPackagedCore(root, extension, desktop, top, frame) 
     )
     await firefoxWaitFor(
       marionette,
-      `document.readyState === 'complete' && (window.wrappedJSObject || window).__wren?.loadToken !== ${JSON.stringify(firefoxWrenDocument)} && (window.wrappedJSObject || window).__wren?.provider === (window.wrappedJSObject || window).ethereum && (window.wrappedJSObject || window).__wren?.provider?.isConnected?.() === true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === true`,
+      `document.readyState === 'complete' && (window.wrappedJSObject || window).__saf0o?.loadToken !== ${JSON.stringify(firefoxSaf0oDocument)} && (window.wrappedJSObject || window).__saf0o?.provider === (window.wrappedJSObject || window).ethereum && (window.wrappedJSObject || window).__saf0o?.provider?.isConnected?.() === true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === true`,
       'Firefox packaged action-popup MetaMask identity reload'
     )
     const requestCountBeforeMetaMaskConnection = desktop.requests.length
     const firefoxMetaMaskSelection = await firefoxEvaluate(
       marionette,
-      `(window.wrappedJSObject || window).__wren.selectExplorerProvider()`
+      `(window.wrappedJSObject || window).__saf0o.selectExplorerProvider()`
     )
     assert.equal(firefoxMetaMaskSelection.chainBefore, '0x1')
     assert.equal(firefoxMetaMaskSelection.chainAfter, '0x2105')
@@ -1947,11 +1947,11 @@ async function qualifyFirefoxPackagedCore(root, extension, desktop, top, frame) 
     ])
     await firefoxWaitFor(
       marionette,
-      `(window.wrappedJSObject || window).__wren.accountChanges.length === 1`,
+      `(window.wrappedJSObject || window).__saf0o.accountChanges.length === 1`,
       'Firefox packaged MetaMask-identity account grant event'
     )
     assert.deepEqual(
-      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__wren.chainChanges`),
+      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__saf0o.chainChanges`),
       ['0x2105']
     )
     assertExplorerConnectionRequests(
@@ -1961,40 +1961,40 @@ async function qualifyFirefoxPackagedCore(root, extension, desktop, top, frame) 
     )
     const firefoxMetaMaskDocument = await firefoxEvaluate(
       marionette,
-      `(window.wrappedJSObject || window).__wren.loadToken`
+      `(window.wrappedJSObject || window).__saf0o.loadToken`
     )
     await firefoxOpenActionPopup(marionette, installed.value)
     await firefoxWaitForActionPopup(
       marionette,
       installed.value,
-      `[...document.querySelectorAll('[role="radio"]')].some((control) => control.textContent.trim() === 'Wren')`,
-      'Firefox packaged action-popup Wren identity control'
+      `[...document.querySelectorAll('[role="radio"]')].some((control) => control.textContent.trim() === 'Saf0o')`,
+      'Firefox packaged action-popup Saf0o identity control'
     )
     assert.equal(
       await selectFirefoxDappBehindPopup(marionette, top.origin),
       true,
-      'Firefox packaged dapp tab remains active for Wren restoration'
+      'Firefox packaged dapp tab remains active for Saf0o restoration'
     )
     await firefoxActionPopupEvaluate(
       marionette,
       installed.value,
-      `(() => { [...document.querySelectorAll('[role="radio"]')].find((control) => control.textContent.trim() === 'Wren').click(); return true })()`
+      `(() => { [...document.querySelectorAll('[role="radio"]')].find((control) => control.textContent.trim() === 'Saf0o').click(); return true })()`
     )
     await firefoxWaitForActionPopup(
       marionette,
       installed.value,
       `document.querySelector('[role="alertdialog"]')`,
-      'Firefox packaged action-popup Wren confirmation'
+      'Firefox packaged action-popup Saf0o confirmation'
     )
     await firefoxActionPopupEvaluate(
       marionette,
       installed.value,
-      `(() => { [...document.querySelectorAll('button')].find((button) => button.textContent.trim() === 'Switch to Wren').click(); return true })()`
+      `(() => { [...document.querySelectorAll('button')].find((button) => button.textContent.trim() === 'Switch to Saf0o').click(); return true })()`
     )
     await firefoxWaitFor(
       marionette,
-      `document.readyState === 'complete' && (window.wrappedJSObject || window).__wren?.loadToken !== ${JSON.stringify(firefoxMetaMaskDocument)} && (window.wrappedJSObject || window).__wren?.provider === (window.wrappedJSObject || window).ethereum && (window.wrappedJSObject || window).__wren?.provider?.isConnected?.() === true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === false`,
-      'Firefox packaged action-popup Wren identity reload'
+      `document.readyState === 'complete' && (window.wrappedJSObject || window).__saf0o?.loadToken !== ${JSON.stringify(firefoxMetaMaskDocument)} && (window.wrappedJSObject || window).__saf0o?.provider === (window.wrappedJSObject || window).ethereum && (window.wrappedJSObject || window).__saf0o?.provider?.isConnected?.() === true && JSON.parse(localStorage.getItem('__frameAppearAsMM__')) === false`,
+      'Firefox packaged action-popup Saf0o identity reload'
     )
     console.log(
       'firefox artifact qualification: packaged action-popup identity controls, background control/page authentication, and provider/legacy core passed'
@@ -2009,7 +2009,7 @@ async function qualifyFirefoxPackagedCore(root, extension, desktop, top, frame) 
 
 async function qualify(browser) {
   assert.equal(QUALIFICATION_AUTH_VERSION, 3, 'Browser qualification must use protocol 3')
-  const root = await mkdtemp(path.join(os.tmpdir(), `wren-companion-${browser}-`))
+  const root = await mkdtemp(path.join(os.tmpdir(), `saf0o-companion-${browser}-`))
   const extension = path.join(root, 'extension')
   const desktop = new MockDesktop({
     availableChains,

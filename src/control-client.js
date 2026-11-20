@@ -53,14 +53,14 @@ class ControlClient {
     if (socket !== this.socket || this.disposed) return
     const parsed = parseDesktopMessage(data)
     if (!parsed.success || parsed.value.method === 'eth_subscription') {
-      socket.close(1002, 'Invalid Wren control response')
+      socket.close(1002, 'Invalid Saf0o control response')
       return
     }
 
     const payload = parsed.value
     const pending = this.pending.get(payload.id)
     if (!pending) {
-      socket.close(1002, 'Unexpected Wren control response')
+      socket.close(1002, 'Unexpected Saf0o control response')
       return
     }
     this.pending.delete(payload.id)
@@ -73,7 +73,7 @@ class ControlClient {
   handleClose(socket) {
     if (socket !== this.socket) return
     this.socket = undefined
-    this.rejectPending(4900, 'Wren disconnected')
+    this.rejectPending(4900, 'Saf0o disconnected')
     this.onClose()
     this.scheduleReconnect()
   }
@@ -94,7 +94,7 @@ class ControlClient {
       )
     }
     if (this.socket?.readyState !== WEB_SOCKET_OPEN) {
-      return Promise.reject(Object.assign(new Error('Wren disconnected'), { code: 4900 }))
+      return Promise.reject(Object.assign(new Error('Saf0o disconnected'), { code: 4900 }))
     }
     if (this.pending.size >= 16) {
       return Promise.reject(Object.assign(new Error('Too many control requests'), { code: -32005 }))
@@ -105,10 +105,10 @@ class ControlClient {
       const socket = this.socket
       const timer = this.setTimer(() => {
         this.pending.delete(id)
-        reject(Object.assign(new Error('Wren control request timed out'), { code: -32002 }))
+        reject(Object.assign(new Error('Saf0o control request timed out'), { code: -32002 }))
         if (closeOnTimeout && this.socket === socket) {
           try {
-            socket.close(1011, 'Wren keepalive timed out')
+            socket.close(1011, 'Saf0o keepalive timed out')
           } catch {
             this.handleClose(socket)
           }
@@ -120,9 +120,9 @@ class ControlClient {
       } catch {
         this.pending.delete(id)
         this.clearTimer(timer)
-        reject(Object.assign(new Error('Wren disconnected'), { code: 4900 }))
+        reject(Object.assign(new Error('Saf0o disconnected'), { code: 4900 }))
         try {
-          socket.close(1011, 'Wren request failed')
+          socket.close(1011, 'Saf0o request failed')
         } catch {
           this.handleClose(socket)
         }
@@ -158,7 +158,7 @@ class ControlClient {
     this.paused = true
     if (this.reconnectTimer) this.clearTimer(this.reconnectTimer)
     this.reconnectTimer = undefined
-    this.rejectPending(4900, 'Wren control connection reset')
+    this.rejectPending(4900, 'Saf0o control connection reset')
     const socket = this.socket
     this.socket = undefined
     if (socket) {
@@ -175,7 +175,7 @@ class ControlClient {
     if (this.disposed) return
     this.disposed = true
     if (this.reconnectTimer) this.clearTimer(this.reconnectTimer)
-    this.rejectPending(4900, 'Wren control client closed')
+    this.rejectPending(4900, 'Saf0o control client closed')
     const socket = this.socket
     this.socket = undefined
     socket?.close(1000, 'Control client closed')

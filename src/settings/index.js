@@ -70,7 +70,7 @@ const SettingsScroll = styled.main`
   max-height: 600px;
   background: transparent;
   scrollbar-width: thin;
-  scrollbar-color: var(--wren-border-default) transparent;
+  scrollbar-color: var(--saf0o-border-default) transparent;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -78,7 +78,7 @@ const SettingsScroll = styled.main`
 
   &::-webkit-scrollbar-thumb {
     border-radius: 3px;
-    background: var(--wren-border-default);
+    background: var(--saf0o-border-default);
   }
 
   > * {
@@ -89,7 +89,7 @@ const SettingsScroll = styled.main`
 const DesktopStatus = styled.span`
   min-width: 0;
   flex: 1 1 auto;
-  color: ${(props) => (props.$connected ? 'var(--wren-success)' : 'var(--wren-text-secondary)')};
+  color: ${(props) => (props.$connected ? 'var(--saf0o-success)' : 'var(--saf0o-text-secondary)')};
   font-size: 15px;
   font-weight: 620;
   text-align: left;
@@ -119,18 +119,18 @@ const DesktopStatusControl = styled.button`
   gap: 10px;
   align-items: center;
   border: 0;
-  color: var(--wren-text-secondary);
+  color: var(--saf0o-text-secondary);
   background: transparent;
   box-sizing: border-box;
   cursor: ${(props) => (props.$connected ? 'pointer' : 'default')};
-  transition: background-color var(--wren-motion-fast) var(--wren-ease);
+  transition: background-color var(--saf0o-motion-fast) var(--saf0o-ease);
 
   &:hover:not(:disabled) {
-    background: var(--wren-surface-hover);
+    background: var(--saf0o-surface-hover);
   }
 
   &:active:not(:disabled) {
-    background: var(--wren-surface-active);
+    background: var(--saf0o-surface-active);
   }
 
   &:disabled {
@@ -151,7 +151,7 @@ const AppearDescription = styled.div`
   flex: 1 1 auto;
   align-items: center;
   gap: 9px;
-  color: var(--wren-text-secondary);
+  color: var(--saf0o-text-secondary);
   font-size: 13px;
   font-weight: 520;
 
@@ -177,9 +177,9 @@ const IdentityChoices = styled.div`
   flex: none;
   padding: 2px;
   gap: 2px;
-  border: 1px solid var(--wren-border-subtle);
-  border-radius: var(--wren-radius-sm);
-  background: var(--wren-surface-inset);
+  border: 1px solid var(--saf0o-border-subtle);
+  border-radius: var(--saf0o-radius-sm);
+  background: var(--saf0o-surface-inset);
 `
 
 const IdentityFeedback = styled.div`
@@ -192,23 +192,23 @@ const IdentityButton = styled.button`
   min-width: 72px;
   min-height: 44px;
   padding: 0 10px;
-  border: 1px solid ${(props) => (props.$selected ? 'var(--wren-accent-primary)' : 'transparent')};
+  border: 1px solid ${(props) => (props.$selected ? 'var(--saf0o-accent-primary)' : 'transparent')};
   border-radius: 3px;
-  color: ${(props) => (props.$selected ? 'var(--wren-text-primary)' : 'var(--wren-text-tertiary)')};
-  background: ${(props) => (props.$selected ? 'var(--wren-accent-primary-soft)' : 'transparent')};
+  color: ${(props) => (props.$selected ? 'var(--saf0o-text-primary)' : 'var(--saf0o-text-tertiary)')};
+  background: ${(props) => (props.$selected ? 'var(--saf0o-accent-primary-soft)' : 'transparent')};
   box-shadow: none;
   cursor: pointer;
   font-size: 12px;
   font-weight: 580;
   transition:
-    color var(--wren-motion-fast) var(--wren-ease),
-    background-color var(--wren-motion-fast) var(--wren-ease),
-    border-color var(--wren-motion-fast) var(--wren-ease);
+    color var(--saf0o-motion-fast) var(--saf0o-ease),
+    background-color var(--saf0o-motion-fast) var(--saf0o-ease),
+    border-color var(--saf0o-motion-fast) var(--saf0o-ease);
 
   &:hover {
-    color: var(--wren-text-primary);
+    color: var(--saf0o-text-primary);
     background: ${(props) =>
-      props.$selected ? 'var(--wren-accent-primary-soft)' : 'var(--wren-surface-hover)'};
+      props.$selected ? 'var(--saf0o-accent-primary-soft)' : 'var(--saf0o-surface-hover)'};
   }
 `
 
@@ -220,7 +220,7 @@ const PairingPanel = styled.div`
 
 const PairingTitle = styled.h2`
   margin: 0;
-  color: var(--wren-text-primary);
+  color: var(--saf0o-text-primary);
   font-size: 16px;
   font-weight: 650;
   font-variation-settings:
@@ -231,19 +231,19 @@ const PairingTitle = styled.h2`
 const PairingCode = styled.div`
   margin: 14px auto 10px;
   padding: 8px 12px 9px;
-  border: 1px solid var(--wren-border-default);
-  border-radius: var(--wren-radius-sm);
-  color: var(--wren-accent-hover);
-  background: var(--wren-surface-inset);
+  border: 1px solid var(--saf0o-border-default);
+  border-radius: var(--saf0o-radius-sm);
+  color: var(--saf0o-accent-hover);
+  background: var(--saf0o-surface-inset);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.38);
-  font-family: var(--wren-font-mono);
+  font-family: var(--saf0o-font-mono);
   font-size: 28px;
   font-weight: 580;
   letter-spacing: 0.18em;
 `
 
 const PairingDetail = styled.div`
-  color: var(--wren-text-secondary);
+  color: var(--saf0o-text-secondary);
   font-size: 13px;
   line-height: 1.5;
   overflow-wrap: anywhere;
@@ -251,14 +251,14 @@ const PairingDetail = styled.div`
 
 const StateNotice = styled.div`
   padding: 22px 24px 24px;
-  color: var(--wren-text-secondary);
+  color: var(--saf0o-text-secondary);
   font-size: 14px;
   line-height: 1.5;
   text-align: center;
 `
 
 const StateNoticeTitle = styled.div`
-  color: var(--wren-text-primary);
+  color: var(--saf0o-text-primary);
   font-size: 16px;
   font-weight: 620;
 `
@@ -272,34 +272,34 @@ const StateNoticeAction = styled.button`
   min-height: 44px;
   margin-top: 16px;
   padding: 0 14px;
-  border: 1px solid var(--wren-accent-hover);
-  border-radius: var(--wren-radius-sm);
-  color: var(--wren-text-inverse);
-  background: var(--wren-accent);
-  background-image: var(--wren-control-texture);
-  box-shadow: var(--wren-control-shadow);
+  border: 1px solid var(--saf0o-accent-hover);
+  border-radius: var(--saf0o-radius-sm);
+  color: var(--saf0o-text-inverse);
+  background: var(--saf0o-accent);
+  background-image: var(--saf0o-control-texture);
+  box-shadow: var(--saf0o-control-shadow);
   cursor: pointer;
   font: inherit;
   font-size: 13px;
   font-weight: 650;
 
   &:hover {
-    background-color: var(--wren-accent-hover);
+    background-color: var(--saf0o-accent-hover);
   }
 
   &:active {
     transform: translateY(1px);
-    background-color: var(--wren-accent-active);
+    background-color: var(--saf0o-accent-active);
   }
 
   &:focus-visible {
-    outline-color: var(--wren-focus-on-accent);
+    outline-color: var(--saf0o-focus-on-accent);
   }
 
   &:disabled {
-    border-color: var(--wren-border-subtle);
-    color: var(--wren-text-muted);
-    background: var(--wren-bg-elevated);
+    border-color: var(--saf0o-border-subtle);
+    color: var(--saf0o-text-muted);
+    background: var(--saf0o-bg-elevated);
     background-image: none;
     box-shadow: none;
     cursor: default;
@@ -308,7 +308,7 @@ const StateNoticeAction = styled.button`
 
 const StateNoticeStatus = styled.div`
   margin-top: 10px;
-  color: var(--wren-text-tertiary);
+  color: var(--saf0o-text-tertiary);
   font-size: 12px;
   font-weight: 560;
 `
@@ -331,10 +331,10 @@ const NetworkRefreshWarning = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  border-bottom: 1px solid var(--wren-border-subtle);
-  border-inline-start: 3px solid var(--wren-warning);
-  color: var(--wren-warning);
-  background: var(--wren-warning-soft);
+  border-bottom: 1px solid var(--saf0o-border-subtle);
+  border-inline-start: 3px solid var(--saf0o-warning);
+  color: var(--saf0o-warning);
+  background: var(--saf0o-warning-soft);
   font-size: 12px;
 
   button {
@@ -342,35 +342,35 @@ const NetworkRefreshWarning = styled.div`
     min-height: 44px;
     padding: 0 10px;
     flex: none;
-    border: 1px solid var(--wren-warning);
-    border-radius: var(--wren-radius-sm);
-    color: var(--wren-text-primary);
-    background: var(--wren-bg-elevated);
+    border: 1px solid var(--saf0o-warning);
+    border-radius: var(--saf0o-radius-sm);
+    color: var(--saf0o-text-primary);
+    background: var(--saf0o-bg-elevated);
     cursor: pointer;
     font: inherit;
     font-weight: 620;
   }
 
   button:hover:not(:disabled) {
-    background: var(--wren-surface-hover);
+    background: var(--saf0o-surface-hover);
   }
 
   button:focus-visible {
-    outline: 2px solid var(--wren-focus);
+    outline: 2px solid var(--saf0o-focus);
     outline-offset: 2px;
   }
 `
 
 const StateNoticeSecondaryAction = styled(StateNoticeAction)`
   margin-top: 0;
-  border-color: var(--wren-border-default);
-  color: var(--wren-text-primary);
-  background: var(--wren-bg-elevated);
+  border-color: var(--saf0o-border-default);
+  color: var(--saf0o-text-primary);
+  background: var(--saf0o-bg-elevated);
   background-image: none;
   box-shadow: none;
 
   &:hover {
-    background: var(--wren-surface-hover);
+    background: var(--saf0o-surface-hover);
   }
 `
 
@@ -380,12 +380,12 @@ const StateNoticePrimaryAction = styled(StateNoticeAction)`
 
 const PairingButton = styled.button`
   appearance: none;
-  background: ${(props) => (props.$confirm ? 'var(--wren-danger-soft)' : 'transparent')};
-  background-image: ${(props) => (props.$confirm ? 'var(--wren-control-texture)' : 'none')};
-  border: 1px solid ${(props) => (props.$confirm ? 'var(--wren-danger)' : 'transparent')};
-  border-radius: var(--wren-radius-sm);
-  box-shadow: ${(props) => (props.$confirm ? 'var(--wren-control-shadow)' : 'none')};
-  color: ${(props) => (props.$confirm ? 'var(--wren-danger)' : 'var(--wren-text-secondary)')};
+  background: ${(props) => (props.$confirm ? 'var(--saf0o-danger-soft)' : 'transparent')};
+  background-image: ${(props) => (props.$confirm ? 'var(--saf0o-control-texture)' : 'none')};
+  border: 1px solid ${(props) => (props.$confirm ? 'var(--saf0o-danger)' : 'transparent')};
+  border-radius: var(--saf0o-radius-sm);
+  box-shadow: ${(props) => (props.$confirm ? 'var(--saf0o-control-shadow)' : 'none')};
+  color: ${(props) => (props.$confirm ? 'var(--saf0o-danger)' : 'var(--saf0o-text-secondary)')};
   cursor: pointer;
   font: inherit;
   font-size: 13px;
@@ -396,23 +396,23 @@ const PairingButton = styled.button`
   width: ${(props) => (props.$confirm ? 'calc(100% - 28px)' : 'auto')};
 
   &:hover {
-    color: ${(props) => (props.$confirm ? 'var(--wren-danger)' : 'var(--wren-text-primary)')};
+    color: ${(props) => (props.$confirm ? 'var(--saf0o-danger)' : 'var(--saf0o-text-primary)')};
     border-color: ${(props) =>
-      props.$confirm ? 'var(--wren-danger)' : 'var(--wren-border-subtle)'};
-    background-color: var(--wren-surface-hover);
-    box-shadow: ${(props) => (props.$confirm ? 'var(--wren-control-shadow)' : 'var(--wren-control-shadow-hover)')};
+      props.$confirm ? 'var(--saf0o-danger)' : 'var(--saf0o-border-subtle)'};
+    background-color: var(--saf0o-surface-hover);
+    box-shadow: ${(props) => (props.$confirm ? 'var(--saf0o-control-shadow)' : 'var(--saf0o-control-shadow-hover)')};
   }
 
   &:active {
     transform: translateY(1px);
-    background-color: var(--wren-surface-active);
-    box-shadow: var(--wren-control-shadow-pressed);
+    background-color: var(--saf0o-surface-active);
+    box-shadow: var(--saf0o-control-shadow-pressed);
   }
 `
 
 const CannotConnectSub = styled.div`
   padding: ${(props) => (props.$standalone ? '22px 24px 24px' : '0 24px 24px')};
-  color: var(--wren-text-secondary);
+  color: var(--saf0o-text-secondary);
   font-size: 14px;
   line-height: 1.5;
   text-align: center;
@@ -420,7 +420,7 @@ const CannotConnectSub = styled.div`
 
 const UnsupportedTab = styled.div`
   padding: 24px 24px 8px;
-  color: var(--wren-text-primary);
+  color: var(--saf0o-text-primary);
   font-size: 16px;
   font-weight: 620;
   text-align: center;
@@ -429,22 +429,22 @@ const UnsupportedTab = styled.div`
 const UnsupportedOrigin = styled.div`
   max-width: 100%;
   padding-top: 8px;
-  color: var(--wren-accent-hover);
-  font-family: var(--wren-font-mono);
+  color: var(--saf0o-accent-hover);
+  font-family: var(--saf0o-font-mono);
   font-size: 12px;
   overflow-wrap: anywhere;
 `
 
 const Download = styled.a`
-  color: var(--wren-text-inverse);
+  color: var(--saf0o-text-inverse);
   min-height: 44px;
   margin: 0 14px 14px;
   width: calc(100% - 28px);
-  border: 1px solid var(--wren-accent-hover);
-  border-radius: var(--wren-radius-sm);
-  background: var(--wren-accent);
-  background-image: var(--wren-control-texture);
-  box-shadow: var(--wren-control-shadow);
+  border: 1px solid var(--saf0o-accent-hover);
+  border-radius: var(--saf0o-radius-sm);
+  background: var(--saf0o-accent);
+  background-image: var(--saf0o-control-texture);
+  box-shadow: var(--saf0o-control-shadow);
   font-weight: 650;
   display: flex;
   justify-content: center;
@@ -457,20 +457,20 @@ const Download = styled.a`
   }
 
   &:visited {
-    color: var(--wren-text-inverse);
+    color: var(--saf0o-text-inverse);
   }
 
   &:hover {
-    background-color: var(--wren-accent-hover);
+    background-color: var(--saf0o-accent-hover);
   }
 
   &:active {
     transform: translateY(1px);
-    background-color: var(--wren-accent-active);
+    background-color: var(--saf0o-accent-active);
   }
 
   &:focus-visible {
-    outline-color: var(--wren-focus-on-accent);
+    outline-color: var(--saf0o-focus-on-accent);
   }
 `
 
@@ -483,8 +483,8 @@ const CurrentOriginTitle = styled.div`
   align-items: center;
   min-height: 50px;
   padding: 9px 14px;
-  color: var(--wren-text-secondary);
-  font-family: var(--wren-font-mono);
+  color: var(--saf0o-text-secondary);
+  font-family: var(--saf0o-font-mono);
   font-size: 12px;
   font-weight: 450;
 
@@ -492,7 +492,7 @@ const CurrentOriginTitle = styled.div`
     width: 15px;
     height: 15px;
     flex: none;
-    color: var(--wren-text-muted);
+    color: var(--saf0o-text-muted);
   }
 
   > span {
@@ -549,7 +549,7 @@ const ChainLedger = styled.div`
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
   scrollbar-width: thin;
-  scrollbar-color: var(--wren-border-default) transparent;
+  scrollbar-color: var(--saf0o-border-default) transparent;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -557,7 +557,7 @@ const ChainLedger = styled.div`
 
   &::-webkit-scrollbar-thumb {
     border-radius: 3px;
-    background: var(--wren-border-default);
+    background: var(--saf0o-border-default);
   }
 `
 
@@ -584,25 +584,25 @@ const ChainButtonControl = styled.button`
   min-height: 44px;
   gap: 10px;
   border: 0;
-  color: ${(props) => (props.$selected ? 'var(--wren-text-primary)' : 'var(--wren-text-secondary)')};
-  background: ${(props) => (props.$selected ? 'var(--wren-ledger-selected)' : 'transparent')};
+  color: ${(props) => (props.$selected ? 'var(--saf0o-text-primary)' : 'var(--saf0o-text-secondary)')};
+  background: ${(props) => (props.$selected ? 'var(--saf0o-ledger-selected)' : 'transparent')};
   cursor: pointer;
   text-align: left;
-  transition: background-color var(--wren-motion-fast) var(--wren-ease);
+  transition: background-color var(--saf0o-motion-fast) var(--saf0o-ease);
   scroll-margin-block: 4px;
 
   &:hover:not(:disabled) {
-    color: var(--wren-text-primary);
+    color: var(--saf0o-text-primary);
     background: ${(props) =>
-      props.$selected ? 'var(--wren-ledger-selected)' : 'var(--wren-surface-hover)'};
+      props.$selected ? 'var(--saf0o-ledger-selected)' : 'var(--saf0o-surface-hover)'};
   }
 
   &:active:not(:disabled) {
-    background: var(--wren-surface-active);
+    background: var(--saf0o-surface-active);
   }
 
   &:disabled {
-    color: var(--wren-text-muted);
+    color: var(--saf0o-text-muted);
     cursor: default;
     opacity: 0.62;
   }
@@ -838,7 +838,7 @@ class _Settings extends React.Component {
                   <PairingTitle>Pair this Companion</PairingTitle>
                   <PairingCode>{authentication.pairingCode}</PairingCode>
                   <PairingDetail>
-                    Approve only when this code matches Wren on desktop.
+                    Approve only when this code matches Saf0o on desktop.
                   </PairingDetail>
                   <StateNoticeStatus>Waiting for approval</StateNoticeStatus>
                 </PairingPanel>
@@ -855,10 +855,10 @@ class _Settings extends React.Component {
           <ClusterRow>
             <ClusterBoxMain>
               <PairingPanel role="alert">
-                <PairingTitle>Update Wren</PairingTitle>
+                <PairingTitle>Update Saf0o</PairingTitle>
                 <PairingDetail>
-                  This Companion version needs a newer Wren desktop to verify its identity. Update
-                  Wren, then reconnect.
+                  This Companion version needs a newer Saf0o desktop to verify its identity. Update
+                  Saf0o, then reconnect.
                 </PairingDetail>
                 <StateNoticeAction
                   type="button"
@@ -883,11 +883,11 @@ class _Settings extends React.Component {
               <ClusterValue>
                 <PairingPanel>
                   <PairingTitle>
-                    {identityChanged ? 'Wren identity changed' : 'Companion authentication failed'}
+                    {identityChanged ? 'Saf0o identity changed' : 'Companion authentication failed'}
                   </PairingTitle>
                   <PairingDetail>
                     {identityChanged
-                      ? 'Wren no longer matches the saved desktop. Reset pairing only if you expect this change.'
+                      ? 'Saf0o no longer matches the saved desktop. Reset pairing only if you expect this change.'
                       : authentication.message}
                   </PairingDetail>
                 </PairingPanel>
@@ -922,7 +922,7 @@ class _Settings extends React.Component {
               <ClusterValue>
                 <PairingPanel>
                   <PairingTitle>Connecting securely</PairingTitle>
-                  <PairingDetail>Wren is verifying this Companion.</PairingDetail>
+                  <PairingDetail>Saf0o is verifying this Companion.</PairingDetail>
                   <StateNoticeStatus>Connecting</StateNoticeStatus>
                 </PairingPanel>
               </ClusterValue>
@@ -985,7 +985,7 @@ class _Settings extends React.Component {
           <ClusterValue>
             <div>
               <CannotConnectSub $standalone>
-                Wren is unavailable. Start the desktop app to continue.
+                Saf0o is unavailable. Start the desktop app to continue.
               </CannotConnectSub>
             </div>
           </ClusterValue>
@@ -997,7 +997,7 @@ class _Settings extends React.Component {
               target="_blank"
               rel="noreferrer"
             >
-              Download Wren
+              Download Saf0o
             </Download>
           </ClusterValue>
         </ClusterRow>
@@ -1009,8 +1009,8 @@ class _Settings extends React.Component {
     return (
       <MainPanel>
         {this.statusNotice(
-          'Connecting to Wren',
-          'Looking for the Wren desktop app.',
+          'Connecting to Saf0o',
+          'Looking for the Saf0o desktop app.',
           undefined,
           'Checking'
         )}
@@ -1025,7 +1025,7 @@ class _Settings extends React.Component {
     return this.statusNotice(
       canRefresh ? 'Refresh this tab' : 'Refresh unavailable',
       canRefresh
-        ? 'Wren has not confirmed this tab’s connection yet.'
+        ? 'Saf0o has not confirmed this tab’s connection yet.'
         : 'Companion could not confirm this tab’s current document. Reload the tab, then reopen Companion.',
       canRefresh ? 'Refresh this tab' : undefined,
       canRefresh ? 'Not connected' : 'Document changed',
@@ -1044,7 +1044,7 @@ class _Settings extends React.Component {
       )
       return this.statusNotice(
         'Switching network',
-        `Waiting for Wren to switch this tab to ${target?.name || 'the selected network'}.`,
+        `Waiting for Saf0o to switch this tab to ${target?.name || 'the selected network'}.`,
         'Switching…',
         'Pending'
       )
@@ -1052,7 +1052,7 @@ class _Settings extends React.Component {
     if (chainSwitch.status === 'rejected') {
       return this.statusNotice(
         'Network switch declined',
-        'Wren kept the current network.',
+        'Saf0o kept the current network.',
         'Retry network switch',
         'Declined',
         () => this.setState({ chainSwitch: { status: 'idle' } }),
@@ -1062,7 +1062,7 @@ class _Settings extends React.Component {
     if (chainSwitch.status === 'failed') {
       return this.statusNotice(
         'Network unavailable',
-        'Wren cannot use this network right now.',
+        'Saf0o cannot use this network right now.',
         'Choose another network',
         'Unavailable',
         () => {
@@ -1073,7 +1073,7 @@ class _Settings extends React.Component {
     }
     return this.statusNotice(
       'Network unavailable',
-      'Wren cannot use this network right now.',
+      'Saf0o cannot use this network right now.',
       'Choose another network',
       'Unavailable',
       this.focusAvailableNetwork,
@@ -1084,7 +1084,7 @@ class _Settings extends React.Component {
   noNetworks(interactionLocked) {
     return this.statusNotice(
       'No networks available',
-      'Wren has no available networks for this tab.',
+      'Saf0o has no available networks for this tab.',
       'Open network settings',
       'Unavailable',
       () => postFrameMessage({ type: 'summon' }),
@@ -1095,7 +1095,7 @@ class _Settings extends React.Component {
   networksLoading() {
     return this.statusNotice(
       'Loading networks',
-      'Reading available networks from Wren.',
+      'Reading available networks from Saf0o.',
       undefined,
       'Checking'
     )
@@ -1104,7 +1104,7 @@ class _Settings extends React.Component {
   networksUnavailable(interactionLocked) {
     return this.statusNotice(
       'Networks unavailable',
-      'Wren could not refresh its available networks.',
+      'Saf0o could not refresh its available networks.',
       'Refresh networks',
       'Unavailable',
       () => postFrameMessage({ type: 'refresh' }),
@@ -1115,7 +1115,7 @@ class _Settings extends React.Component {
   networkRefreshWarning(interactionLocked) {
     return (
       <NetworkRefreshWarning role="status">
-        <span>Wren could not refresh its available networks.</span>
+        <span>Saf0o could not refresh its available networks.</span>
         <button
           type="button"
           disabled={interactionLocked || this.store('chainsStatus') === 'loading'}
@@ -1133,7 +1133,7 @@ class _Settings extends React.Component {
         <ClusterRow>
           <ClusterValue>
             <div>
-              <UnsupportedTab>This browser tab is not available to Wren.</UnsupportedTab>
+              <UnsupportedTab>This browser tab is not available to Saf0o.</UnsupportedTab>
               <CannotConnectSub>
                 <UnsupportedOrigin title={origin}>{origin}</UnsupportedOrigin>
               </CannotConnectSub>
@@ -1154,7 +1154,7 @@ class _Settings extends React.Component {
         type="button"
         $connected={isConnected}
         disabled={!isConnected || interactionLocked}
-        aria-label={isConnected ? 'Desktop connected. Open Wren desktop.' : undefined}
+        aria-label={isConnected ? 'Desktop connected. Open Saf0o desktop.' : undefined}
         aria-live="polite"
         onClick={() => postFrameMessage({ type: 'summon' })}
       >
@@ -1169,7 +1169,7 @@ class _Settings extends React.Component {
           {isConnected
             ? 'Desktop connected'
             : isChecking
-              ? 'Connecting to Wren'
+              ? 'Connecting to Saf0o'
               : 'Desktop unavailable'}
         </DesktopStatus>
         {isConnected ? (
@@ -1189,13 +1189,13 @@ class _Settings extends React.Component {
   appearAsMMToggle(interactionLocked) {
     const mmAppear = this.props.mmAppear
     const identitySwitch = this.state.identitySwitch
-    const targetIdentity = identitySwitch.target ? 'MetaMask' : 'Wren'
+    const targetIdentity = identitySwitch.target ? 'MetaMask' : 'Saf0o'
 
     return (
       <ClusterRow>
         <IdentityRow>
           <AppearDescription>
-            <span>{mmAppear ? 'Injecting as MetaMask' : 'Injecting as Wren'}</span>
+            <span>{mmAppear ? 'Injecting as MetaMask' : 'Injecting as Saf0o'}</span>
           </AppearDescription>
           <IdentityChoices
             role="radiogroup"
@@ -1214,7 +1214,7 @@ class _Settings extends React.Component {
                 if (mmAppear) this.armIdentitySwitch(false)
               }}
             >
-              Wren
+              Saf0o
             </IdentityButton>
             <IdentityButton
               type="button"
@@ -1398,7 +1398,7 @@ class _Settings extends React.Component {
       return this.identityStatusPanel(
         this.statusNotice(
           'Checking this tab',
-          'Confirming this tab’s Wren connection.',
+          'Confirming this tab’s Saf0o connection.',
           undefined,
           'Checking'
         ),

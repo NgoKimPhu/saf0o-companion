@@ -46,7 +46,7 @@ jobs:
           chrome-version: 116.0.5845.96
       - name: Qualify minimum Chrome version
         env:
-          WREN_CHROME_BINARY: ${{ steps.chrome-116.outputs.chrome-path }}
+          SAF0O_CHROME_BINARY: ${{ steps.chrome-116.outputs.chrome-path }}
         run: npm run qualify:browser -- --browser=chrome
       - name: Install Firefox 142 document-identity compatibility boundary
         id: firefox-142
@@ -55,8 +55,8 @@ jobs:
           firefox-version: '142.0'
       - name: Qualify minimum Firefox version and missing-documentId fallback
         env:
-          WREN_FIREFOX_BINARY: ${{ steps.firefox-142.outputs.firefox-path }}
-          WREN_FIREFOX_REQUIRE_NONCE_FALLBACK: '1'
+          SAF0O_FIREFOX_BINARY: ${{ steps.firefox-142.outputs.firefox-path }}
+          SAF0O_FIREFOX_REQUIRE_NONCE_FALLBACK: '1'
         run: npm run qualify:browser -- --browser=firefox
       - name: Verify release package prerequisites
         run: |
@@ -68,13 +68,13 @@ jobs:
       - run: npm run package:verify
       - name: Qualify packaged Chrome and Firefox extensions
         env:
-          WREN_CHROME_BINARY: ${{ steps.chrome-current.outputs.chrome-path }}
-          WREN_FIREFOX_BINARY: ${{ steps.firefox-current.outputs.firefox-path }}
+          SAF0O_CHROME_BINARY: ${{ steps.chrome-current.outputs.chrome-path }}
+          SAF0O_FIREFOX_BINARY: ${{ steps.firefox-current.outputs.firefox-path }}
         run: npm run qualify:artifacts
       - name: Upload qualified companion artifacts
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: wren-companion-${{ github.sha }}
+          name: saf0o-companion-${{ github.sha }}
           path: |
             artifacts/*.zip
             artifacts/*-compatibility.json

@@ -8,7 +8,7 @@ function getTestnet(chainId) {
   return QUALIFICATION_TESTNETS[chainId.toLowerCase()]
 }
 
-globalThis.WrenQualificationTestnets = Object.freeze({
+globalThis.Saf0oQualificationTestnets = Object.freeze({
   all: QUALIFICATION_TESTNETS,
   get: getTestnet
 })

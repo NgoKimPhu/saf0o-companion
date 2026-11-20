@@ -1,6 +1,6 @@
 # Companion Icons
 
-`wren-mark.svg` matches Wren's approved Character-flat vector master.
+`saf0o-mark.svg` matches Saf0o's approved Character-flat vector master.
 `src/icon.png` matches the canonical 512px desktop icon.
 
 Toolbar and extension-manager icons scale the bird 1.12× within the same tile.

@@ -2,9 +2,9 @@ import { createHash, randomBytes, randomUUID, webcrypto } from 'node:crypto'
 import { createServer } from 'node:http'
 
 const MAX_FRAME_BYTES = 1024 * 1024
-const AUTH_PROTOCOL = 'wren-companion-auth'
+const AUTH_PROTOCOL = 'saf0o-companion-auth'
 export const QUALIFICATION_AUTH_VERSION = 3
-const AUTH_DOMAIN = 'wren-companion-auth-v3\0'
+const AUTH_DOMAIN = 'saf0o-companion-auth-v3\0'
 const CHANNEL_ROLES = new Set(['control', 'page'])
 const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu
 
@@ -49,7 +49,7 @@ async function keyFingerprint(publicKey) {
 
 async function bundleFingerprint(publicKeys) {
   return sha256Base64Url(
-    `wren-companion-key-bundle-v3\0${await keyFingerprint(publicKeys.control)}.${await keyFingerprint(publicKeys.page)}`
+    `saf0o-companion-key-bundle-v3\0${await keyFingerprint(publicKeys.control)}.${await keyFingerprint(publicKeys.page)}`
   )
 }
 
@@ -255,7 +255,7 @@ export class MockDesktop {
     this.port = this.server.address().port
     if (this.port === 1248 && !this.allowProductionPort) {
       await this.close()
-      throw new Error("The isolated desktop selected Wren's live port")
+      throw new Error("The isolated desktop selected Saf0o's live port")
     }
     return this.port
   }
@@ -454,7 +454,7 @@ export class MockDesktop {
         version: QUALIFICATION_AUTH_VERSION,
         step: 'error',
         code: 'invalid-state',
-        message: 'Pair Wren using the Companion control connection first'
+        message: 'Pair Saf0o using the Companion control connection first'
       })
       return connection.peer.close(1008)
     }
@@ -555,7 +555,7 @@ export class MockDesktop {
     const sendResult = (result) => connection.peer.send({ jsonrpc: '2.0', id: request.id, result })
     let result
     if (request.method === 'wallet_getEthereumChains') result = this.availableChains
-    else if (request.method === 'web3_clientVersion') result = 'Wren/qualification'
+    else if (request.method === 'web3_clientVersion') result = 'Saf0o/qualification'
     else if (request.method === 'net_version') result = '1'
     else if (request.method === 'eth_chainId') {
       result = this.chainIds.get(request.__frameOrigin) || '0x1'

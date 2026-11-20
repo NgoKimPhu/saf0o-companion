@@ -51,7 +51,7 @@ const expectedExtensionCsp =
 if (manifest.manifest_version !== 3) throw new Error('Extension artifact must use Manifest V3')
 if (manifest.version !== packageFile.version)
   throw new Error('Manifest and package versions differ')
-if (manifest.name !== 'Wren Companion') throw new Error('Store package must use the Wren identity')
+if (manifest.name !== 'Saf0o Companion') throw new Error('Store package must use the Saf0o identity')
 const validBackground =
   browser === 'chrome'
     ? manifest.background?.service_worker === 'index.js' && !manifest.background?.scripts

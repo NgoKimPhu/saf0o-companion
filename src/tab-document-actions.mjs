@@ -68,7 +68,7 @@ const capturedDocumentTarget = (document) =>
       : undefined
 
 const exactDocumentActionResponse = (response, action, document) =>
-  response?.type === 'wren:document-action-result' &&
+  response?.type === 'saf0o:document-action-result' &&
   response.action === action &&
   response.accepted === true &&
   (!validDocumentNonce(document?.documentNonce) ||
@@ -80,12 +80,12 @@ const captureFallbackDocument = async (browserApi, tab, expectedUrl) => {
     if (before?.id !== tab?.id || !sameUrl(before.url, expectedUrl)) return undefined
     const response = await browserApi.tabs.sendMessage(
       tab.id,
-      { type: 'wren:document-action', action: 'capture' },
+      { type: 'saf0o:document-action', action: 'capture' },
       { frameId: 0 }
     )
     const after = await getActiveTab(browserApi)
     if (
-      response?.type !== 'wren:document-action-result' ||
+      response?.type !== 'saf0o:document-action-result' ||
       response.action !== 'capture' ||
       response.accepted !== true ||
       !validDocumentNonce(response.documentNonce) ||
@@ -112,7 +112,7 @@ const sendCapturedDocumentAction = async (browserApi, tab, document, action) => 
       return { accepted: false, attempted: false }
     }
     const message = {
-      type: 'wren:document-action',
+      type: 'saf0o:document-action',
       ...action,
       ...(validDocumentNonce(document.documentNonce) && { documentNonce: document.documentNonce })
     }

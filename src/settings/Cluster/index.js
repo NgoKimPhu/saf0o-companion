@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const ClusterBoxMain = styled.section`
   position: relative;
-  border-top: 1px solid var(--wren-border-subtle);
-  color: var(--wren-text-primary);
+  border-top: 1px solid var(--saf0o-border-subtle);
+  color: var(--saf0o-text-primary);
   background: transparent;
 
   &:first-child {
@@ -16,7 +16,7 @@ export const ClusterBoxLabel = styled.div`
   min-height: 38px;
   padding: 0 16px;
   align-items: center;
-  color: var(--wren-text-tertiary);
+  color: var(--saf0o-text-tertiary);
   font-size: 12px;
   font-weight: 560;
   letter-spacing: 0.08em;
@@ -58,7 +58,7 @@ export const ClusterRow = styled.div`
   display: flex;
   min-width: 0;
   align-items: stretch;
-  border-top: 1px solid var(--wren-border-subtle);
+  border-top: 1px solid var(--saf0o-border-subtle);
 
   &:first-child {
     border-top: 0;
@@ -67,21 +67,21 @@ export const ClusterRow = styled.div`
 
 export const ClusterTag = styled.div`
   padding: 8px 12px;
-  color: var(--wren-text-tertiary);
+  color: var(--saf0o-text-tertiary);
   font-size: 12px;
   text-align: center;
 `
 
 export const ClusterFocus = styled.div`
   padding: 16px 12px;
-  color: var(--wren-text-secondary);
+  color: var(--saf0o-text-secondary);
   font-size: 13px;
   line-height: 20px;
   text-align: center;
 `
 
 export const ClusterFocusHighlight = styled.div`
-  color: var(--wren-success);
+  color: var(--saf0o-success);
   font-size: 15px;
 `
 
@@ -96,7 +96,7 @@ export const ClusterAddressRecipient = styled.div`
   min-width: 0;
   align-items: center;
   justify-content: center;
-  font-family: var(--wren-font-mono);
+  font-family: var(--saf0o-font-mono);
   font-size: 13px;
 `
 
@@ -106,10 +106,10 @@ export const ClusterAddressRecipientFull = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--wren-text-primary);
-  background: var(--wren-surface-hover);
+  color: var(--saf0o-text-primary);
+  background: var(--saf0o-surface-hover);
   opacity: 0;
-  transition: opacity var(--wren-motion-fast) var(--wren-ease);
+  transition: opacity var(--saf0o-motion-fast) var(--saf0o-ease);
 
   &:hover,
   &:focus-within {
@@ -118,6 +118,6 @@ export const ClusterAddressRecipientFull = styled.div`
 `
 
 export const ClusterFira = styled.div`
-  font-family: var(--wren-font-mono);
+  font-family: var(--saf0o-font-mono);
   font-size: 13px;
 `

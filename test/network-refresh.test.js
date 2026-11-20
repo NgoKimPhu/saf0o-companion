@@ -18,7 +18,7 @@ test('accepts only an array network catalog and clears prior refresh errors', ()
   })
   assert.throws(
     () => networkRefreshSuccess({ chainId: 1 }),
-    /Wren returned an invalid network catalog/u
+    /Saf0o returned an invalid network catalog/u
   )
 })
 

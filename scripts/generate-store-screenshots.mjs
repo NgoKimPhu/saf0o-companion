@@ -25,8 +25,8 @@ const assets = {
   companionConnected: await data(path.join(source, 'companion-connected.png'), 'image/png'),
   companionPairing: await data(path.join(source, 'companion-pairing.png'), 'image/png'),
   dapp: await data(path.join(source, 'uniswap-home.png'), 'image/png'),
-  nativePairing: await data(path.join(source, 'wren-native-pairing.png'), 'image/png'),
-  review: await data(path.join(source, 'wren-request-review.png'), 'image/png'),
+  nativePairing: await data(path.join(source, 'saf0o-native-pairing.png'), 'image/png'),
+  review: await data(path.join(source, 'saf0o-request-review.png'), 'image/png'),
   font: await data(
     path.join(root, 'src', 'fonts', 'Recursive', 'Recursive_VF_1.085.woff2'),
     'font/woff2'
@@ -80,32 +80,32 @@ const browser = `
 
 const pages = [
   {
-    file: 'wren-companion-store-pairing-v14.png',
+    file: 'saf0o-companion-store-pairing-v14.png',
     className: 'pairing',
     body: `${browser}
-      <div class="panel companion-pairing"><img src="${assets.companionPairing}" alt="Wren Companion pairing code"></div>
+      <div class="panel companion-pairing"><img src="${assets.companionPairing}" alt="Saf0o Companion pairing code"></div>
       <div class="connector" aria-hidden="true"></div>
-      <div class="panel native-pairing"><img src="${assets.nativePairing}" alt="Matching Wren desktop pairing code"></div>
+      <div class="panel native-pairing"><img src="${assets.nativePairing}" alt="Matching Saf0o desktop pairing code"></div>
       <div class="caption">Pair once. Keep approval on your desktop.</div>`
   },
   {
-    file: 'wren-companion-store-connected-v14.png',
+    file: 'saf0o-companion-store-connected-v14.png',
     className: 'connected',
     body: `${browser}
-      <div class="panel companion-connected"><img src="${assets.companionConnected}" alt="Wren Companion connected to app.uniswap.org"></div>
-      <div class="caption">Use browser dapps with Wren.</div>`
+      <div class="panel companion-connected"><img src="${assets.companionConnected}" alt="Saf0o Companion connected to app.uniswap.org"></div>
+      <div class="caption">Use browser dapps with Saf0o.</div>`
   },
   {
-    file: 'wren-companion-store-review-v14.png',
+    file: 'saf0o-companion-store-review-v14.png',
     className: 'review',
     body: `${browser}
-      <div class="panel review-frame"><img src="${assets.review}" alt="Wren transaction review"></div>
-      <div class="panel companion-connected"><img src="${assets.companionConnected}" alt="Wren Companion connected to app.uniswap.org"></div>
-      <div class="caption">Review requests in Wren before you act.</div>`
+      <div class="panel review-frame"><img src="${assets.review}" alt="Saf0o transaction review"></div>
+      <div class="panel companion-connected"><img src="${assets.companionConnected}" alt="Saf0o Companion connected to app.uniswap.org"></div>
+      <div class="caption">Review requests in Saf0o before you act.</div>`
   }
 ]
 
-const temporary = await mkdtemp(path.join(os.tmpdir(), 'wren-companion-store-'))
+const temporary = await mkdtemp(path.join(os.tmpdir(), 'saf0o-companion-store-'))
 try {
   const chrome = executable(chromeCandidates)
   for (const page of pages) {

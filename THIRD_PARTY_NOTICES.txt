@@ -1,4 +1,4 @@
-Wren Companion bundles portions of the following MIT-licensed packages:
+Saf0o Companion bundles portions of the following MIT-licensed packages:
 
 - @emotion/is-prop-valid and @emotion/memoize
 - events

@@ -243,25 +243,25 @@ test('fails closed on pinned-desktop replacement, expiry, tamper, replay, and do
   const expired = await setup()
   expired.raw.message(await signedChallenge(expired, desktop, { expiresAt: 1000 }))
   await waitFor(() => expired.raw.closeArgs)
-  assert.deepEqual(expired.raw.closeArgs, [1002, 'Wren authentication challenge mismatch'])
+  assert.deepEqual(expired.raw.closeArgs, [1002, 'Saf0o authentication challenge mismatch'])
 
   const tampered = await setup()
   const badProof = await signedChallenge(tampered, desktop)
   badProof.signature = `${badProof.signature.startsWith('A') ? 'B' : 'A'}${badProof.signature.slice(1)}`
   tampered.raw.message(badProof)
   await waitFor(() => tampered.raw.closeArgs)
-  assert.deepEqual(tampered.raw.closeArgs, [1002, 'Invalid Wren desktop proof'])
+  assert.deepEqual(tampered.raw.closeArgs, [1002, 'Invalid Saf0o desktop proof'])
 
   const replayed = await setup()
   const exchange = await issueChallenge(replayed, desktop)
   replayed.raw.message(exchange.challenge)
   await waitFor(() => replayed.raw.closeArgs)
-  assert.deepEqual(replayed.raw.closeArgs, [1002, 'Wren authentication acknowledgement mismatch'])
+  assert.deepEqual(replayed.raw.closeArgs, [1002, 'Saf0o authentication acknowledgement mismatch'])
 
   const downgraded = await setup()
   downgraded.raw.message({ type: 'frame-auth', version: 2, step: 'challenge' })
   await waitFor(() => downgraded.raw.closeArgs)
-  assert.deepEqual(downgraded.raw.closeArgs, [1008, 'Wren authentication failed'])
+  assert.deepEqual(downgraded.raw.closeArgs, [1008, 'Saf0o authentication failed'])
   assert.equal(downgraded.statuses.at(-1).status, 'upgrade-required')
 })
 
@@ -287,7 +287,7 @@ test('never pairs over page and denied rotation retains the active credential', 
     version: 3,
     step: 'error',
     code: 'denied',
-    message: 'Wren Companion pairing was denied'
+    message: 'Saf0o Companion pairing was denied'
   })
   await waitFor(() => rotating.raw.closeArgs)
   assert.equal((await credentialStore.getForAuthentication()).fingerprint, active.fingerprint)
@@ -321,7 +321,7 @@ test('bounds a stalled desktop and cancels asynchronous authentication', async (
   await waitFor(() => raw.sent.length === 1)
   assert.equal([...timers.values()][0].delay, 10_000)
   ;[...timers.values()][0].callback()
-  assert.deepEqual(raw.closeArgs, [1008, 'Wren authentication failed'])
+  assert.deepEqual(raw.closeArgs, [1008, 'Saf0o authentication failed'])
   const sent = raw.sent.length
   await pause()
   assert.equal(raw.sent.length, sent)

@@ -14,15 +14,15 @@ const chainFamilies = Object.freeze({
 const testnetChainIds = new Set([84532, 11155111, 11155420])
 
 const colorTokens = Object.freeze({
-  ethereum: '--wren-chain-ethereum',
-  optimism: '--wren-chain-optimism',
-  gnosis: '--wren-chain-gnosis',
-  polygon: '--wren-chain-polygon',
-  base: '--wren-chain-base',
-  arbitrum: '--wren-chain-arbitrum',
-  katana: '--wren-chain-katana',
-  testnet: '--wren-chain-testnet',
-  custom: '--wren-chain-custom'
+  ethereum: '--saf0o-chain-ethereum',
+  optimism: '--saf0o-chain-optimism',
+  gnosis: '--saf0o-chain-gnosis',
+  polygon: '--saf0o-chain-polygon',
+  base: '--saf0o-chain-base',
+  arbitrum: '--saf0o-chain-arbitrum',
+  katana: '--saf0o-chain-katana',
+  testnet: '--saf0o-chain-testnet',
+  custom: '--saf0o-chain-custom'
 })
 
 export function getChainColorToken(chainId, isTestnet = false) {

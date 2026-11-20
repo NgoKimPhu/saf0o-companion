@@ -1,4 +1,4 @@
-const CACHE_KEY = 'wrenNetworkCatalogV1'
+const CACHE_KEY = 'saf0oNetworkCatalogV1'
 const CACHE_VERSION = 1
 const { validateNetworkCatalog } = require('./network-refresh')
 

@@ -20,7 +20,7 @@ function executable(candidates) {
 const canonical = await readFile(path.join(root, 'src', 'icon.png'))
 const iconData = `data:image/png;base64,${canonical.toString('base64')}`
 const output = path.join(root, 'src', 'icons', 'icon128.png')
-const temporary = await mkdtemp(path.join(os.tmpdir(), 'wren-companion-icon-'))
+const temporary = await mkdtemp(path.join(os.tmpdir(), 'saf0o-companion-icon-'))
 
 try {
   const html = path.join(temporary, 'icon.html')

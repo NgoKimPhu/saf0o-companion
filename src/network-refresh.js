@@ -40,7 +40,7 @@ function validateNetworkCatalog(chains) {
 
 function networkRefreshSuccess(chains) {
   const catalog = validateNetworkCatalog(chains)
-  if (!catalog) throw new Error('Wren returned an invalid network catalog')
+  if (!catalog) throw new Error('Saf0o returned an invalid network catalog')
   return {
     availableChains: catalog,
     chainsStatus: 'ready',

@@ -24,5 +24,5 @@ export const extensionArtifactFiles = Object.freeze([
   'settings.js.LICENSE.txt',
   'style/fonts.css',
   'style/index.css',
-  'style/wren-grain.svg'
+  'style/saf0o-grain.svg'
 ])

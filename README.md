@@ -1,8 +1,8 @@
-# Wren Companion
+# Saf0o Companion
 
-Wren Companion connects Ethereum apps in your browser to the
-[Wren](https://github.com/NgoKimPhu/saf0o) desktop wallet. It carries each page's
-requests to Wren, where you review access, approvals, and signatures.
+Saf0o Companion connects Ethereum apps in your browser to the
+[Saf0o](https://github.com/NgoKimPhu/saf0o) desktop wallet. It carries each page's
+requests to Saf0o, where you review access, approvals, and signatures.
 
 ## Install and pair
 
@@ -10,13 +10,13 @@ Install from the [Chrome Web Store](https://chromewebstore.google.com/detail/wre
 or [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/wren-companion/).
 Chrome's package also works in Brave.
 
-Start Wren and open the Companion popup. Compare the six-digit code in both
-apps, then approve pairing in Wren. You can reset pairing in Companion or
-revoke it in Wren.
+Start Saf0o and open the Companion popup. Compare the six-digit code in both
+apps, then approve pairing in Saf0o. You can reset pairing in Companion or
+revoke it in Saf0o.
 
 ## Compatibility
 
-Companion 0.1.3 uses pairing protocol 3. Use Wren 0.1.11 or a later release
+Companion 0.1.3 uses pairing protocol 3. Use Saf0o 0.1.11 or a later release
 that supports this protocol. The release's `*-compatibility.json` file records
 the minimum desktop commit. Compatible desktop updates do not require a new
 Companion release.
@@ -25,7 +25,7 @@ Companion release.
 
 ```bash
 git clone https://github.com/NgoKimPhu/saf0o-companion
-cd wren-companion
+cd saf0o-companion
 nvm install
 nvm use
 npm run setup:ci
@@ -41,7 +41,7 @@ Load a local build in a disposable browser profile:
   and choose `dist-firefox/manifest.json`. The temporary build lasts until
   Firefox restarts.
 
-Run `npm run qualify:serve` for the local test page. Follow Wren's
+Run `npm run qualify:serve` for the local test page. Follow Saf0o's
 [qualification checklist](https://github.com/NgoKimPhu/saf0o/blob/main/QUALIFICATION.md)
 with test accounts.
 
@@ -57,7 +57,7 @@ separate packages. See [Release](RELEASE.md) and [Store submission](STORE_SUBMIS
 
 ## Developer reference
 
-Companion provides EIP-1193 and announces Wren through EIP-6963 as
+Companion provides EIP-1193 and announces Saf0o through EIP-6963 as
 `io.github.ngokimphu.saf0o`. Legacy `frame_*` labels and `isFrame` remain for
 compatibility.
 

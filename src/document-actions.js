@@ -1,5 +1,5 @@
-const DOCUMENT_ACTION_TYPE = 'wren:document-action'
-const DOCUMENT_ACTION_RESULT_TYPE = 'wren:document-action-result'
+const DOCUMENT_ACTION_TYPE = 'saf0o:document-action'
+const DOCUMENT_ACTION_RESULT_TYPE = 'saf0o:document-action-result'
 const DOCUMENT_CAPTURE_ACTION = 'capture'
 const IDENTITY_STORAGE_KEY = '__frameAppearAsMM__'
 const RELOAD_RESPONSE_GRACE_MS = 100

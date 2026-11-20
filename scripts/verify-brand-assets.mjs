@@ -17,14 +17,14 @@ const iconDimensions = new Map([
 ])
 const storeImageDimensions = new Map([
   ['store-assets/promo-440x280.png', [440, 280]],
-  ['store-assets/screenshots/wren-companion-store-connected-v14.png', [1280, 800]],
-  ['store-assets/screenshots/wren-companion-store-pairing-v14.png', [1280, 800]],
-  ['store-assets/screenshots/wren-companion-store-review-v14.png', [1280, 800]],
+  ['store-assets/screenshots/saf0o-companion-store-connected-v14.png', [1280, 800]],
+  ['store-assets/screenshots/saf0o-companion-store-pairing-v14.png', [1280, 800]],
+  ['store-assets/screenshots/saf0o-companion-store-review-v14.png', [1280, 800]],
   ['store-assets/source/companion-connected.png', [420, 418]],
   ['store-assets/source/companion-pairing.png', [420, 239]],
   ['store-assets/source/uniswap-home.png', [1280, 800]],
-  ['store-assets/source/wren-native-pairing.png', [620, 900]],
-  ['store-assets/source/wren-request-review.png', [930, 1350]]
+  ['store-assets/source/saf0o-native-pairing.png', [620, 900]],
+  ['store-assets/source/saf0o-request-review.png', [930, 1350]]
 ])
 
 const pngDimensions = (data) => {
@@ -49,9 +49,9 @@ for (const [file, expectedDimensions] of storeImageDimensions) {
 assert.deepEqual(
   (await readdir('store-assets/screenshots')).sort(),
   [
-    'wren-companion-store-connected-v14.png',
-    'wren-companion-store-pairing-v14.png',
-    'wren-companion-store-review-v14.png'
+    'saf0o-companion-store-connected-v14.png',
+    'saf0o-companion-store-pairing-v14.png',
+    'saf0o-companion-store-review-v14.png'
   ],
   'Store screenshot inventory contains stale or missing assets'
 )
@@ -62,8 +62,8 @@ assert.deepEqual(
     'companion-connected.png',
     'companion-pairing.png',
     'uniswap-home.png',
-    'wren-native-pairing.png',
-    'wren-request-review.png'
+    'saf0o-native-pairing.png',
+    'saf0o-request-review.png'
   ],
   'Store screenshot source inventory contains stale or missing assets'
 )
@@ -73,7 +73,7 @@ const canonicalHash = createHash('sha256').update(canonical).digest('hex')
 assert.equal(
   canonicalHash,
   '982b4f5c3c5767a4750dfc29cb4aedb81ff4761bf73b219ce943cbe139d93c2b',
-  'The companion brand source must match Wren desktop’s canonical app icon'
+  'The companion brand source must match Saf0o desktop’s canonical app icon'
 )
 
 const storeIcon = await readFile('src/icons/icon128.png')
@@ -83,9 +83,9 @@ assert.equal(
   'The browser-store icon must retain its reviewed 16px safe-area treatment'
 )
 
-const master = await readFile('src/brand/wren-mark.svg', 'utf8')
-assert.match(master, /id="wren-silhouette"/, 'The brand master must define the shared silhouette')
-assert.match(master, /id="wren-color"/, 'The brand master must define the full-color mark')
+const master = await readFile('src/brand/saf0o-mark.svg', 'utf8')
+assert.match(master, /id="saf0o-silhouette"/, 'The brand master must define the shared silhouette')
+assert.match(master, /id="saf0o-color"/, 'The brand master must define the full-color mark')
 
 const manifest = JSON.parse(await readFile('src/manifest.json', 'utf8'))
 for (const size of ['16', '48', '96']) {
@@ -94,4 +94,4 @@ for (const size of ['16', '48', '96']) {
 }
 assert.equal(manifest.icons?.['128'], 'icons/icon128.png')
 
-console.log('Coherent Wren Companion icon assets verified')
+console.log('Coherent Saf0o Companion icon assets verified')

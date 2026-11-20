@@ -1,11 +1,11 @@
-const DATABASE_NAME = 'wren-companion'
+const DATABASE_NAME = 'saf0o-companion'
 const DATABASE_VERSION = 1
 const STORE_NAME = 'credentials'
-const CREDENTIAL_ID = 'wren-companion-auth-v3'
+const CREDENTIAL_ID = 'saf0o-companion-auth-v3'
 const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu
 const FINGERPRINT = /^[A-Za-z0-9_-]{43}$/u
 const CHANNEL_ROLES = ['control', 'page']
-const BUNDLE_FINGERPRINT_DOMAIN = 'wren-companion-key-bundle-v3\0'
+const BUNDLE_FINGERPRINT_DOMAIN = 'saf0o-companion-key-bundle-v3\0'
 
 function bytesToBase64Url(bytes) {
   let binary = ''
@@ -165,7 +165,7 @@ async function validateRoleCredential(credential, role, subtle) {
       false,
       ['verify']
     )
-    const probe = new TextEncoder().encode(`wren-companion-credential-v3\0${role}`)
+    const probe = new TextEncoder().encode(`saf0o-companion-credential-v3\0${role}`)
     const signature = await subtle.sign(
       { name: 'ECDSA', hash: 'SHA-256' },
       credential.privateKey,
@@ -295,13 +295,13 @@ class CredentialStore {
           current.desktop.installationId !== desktop.installationId ||
           current.desktop.fingerprint !== desktop.fingerprint
         ) {
-          throw new Error('Pinned Wren desktop identity mismatch')
+          throw new Error('Pinned Saf0o desktop identity mismatch')
         }
         return current.desktop
       }
-      if (!validDesktopPin(desktop)) throw new Error('Invalid Wren desktop identity')
+      if (!validDesktopPin(desktop)) throw new Error('Invalid Saf0o desktop identity')
       if ((await fingerprintPublicKey(desktop.publicKey, this.subtle)) !== desktop.fingerprint) {
-        throw new Error('Invalid Wren desktop fingerprint')
+        throw new Error('Invalid Saf0o desktop fingerprint')
       }
       const next = { ...current, desktop: { ...desktop } }
       await this.storage.set(next)
@@ -313,9 +313,9 @@ class CredentialStore {
   commitAuthentication(bundle, desktop) {
     return this.mutate(async () => {
       if (this.rotationCandidate === bundle) {
-        if (!validDesktopPin(desktop)) throw new Error('Invalid Wren desktop identity')
+        if (!validDesktopPin(desktop)) throw new Error('Invalid Saf0o desktop identity')
         if ((await fingerprintPublicKey(desktop.publicKey, this.subtle)) !== desktop.fingerprint) {
-          throw new Error('Invalid Wren desktop fingerprint')
+          throw new Error('Invalid Saf0o desktop fingerprint')
         }
         const next = { ...bundle, desktop: { ...desktop } }
         await this.storage.set(next)
@@ -330,13 +330,13 @@ class CredentialStore {
           current.desktop.installationId !== desktop.installationId ||
           current.desktop.fingerprint !== desktop.fingerprint
         ) {
-          throw new Error('Pinned Wren desktop identity mismatch')
+          throw new Error('Pinned Saf0o desktop identity mismatch')
         }
         return current.desktop
       }
-      if (!validDesktopPin(desktop)) throw new Error('Invalid Wren desktop identity')
+      if (!validDesktopPin(desktop)) throw new Error('Invalid Saf0o desktop identity')
       if ((await fingerprintPublicKey(desktop.publicKey, this.subtle)) !== desktop.fingerprint) {
-        throw new Error('Invalid Wren desktop fingerprint')
+        throw new Error('Invalid Saf0o desktop fingerprint')
       }
       const next = { ...current, desktop: { ...desktop } }
       await this.storage.set(next)

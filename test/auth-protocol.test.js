@@ -55,7 +55,7 @@ async function signedChallenge() {
 
 test('uses the immutable cross-repo canonical transcript fixture', () => {
   const fixture = JSON.parse(
-    fs.readFileSync(path.join(__dirname, 'fixtures/wren-companion-auth-v3.json'), 'utf8')
+    fs.readFileSync(path.join(__dirname, 'fixtures/saf0o-companion-auth-v3.json'), 'utf8')
   )
   const message = {
     channelRole: fixture.transcript.channelRole,

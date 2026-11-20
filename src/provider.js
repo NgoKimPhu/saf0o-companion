@@ -11,7 +11,7 @@ const subscriptionEvents = new Set([
 ])
 
 function providerError(error, fallbackCode = -32603) {
-  const result = new Error(error?.message || 'Wren request failed')
+  const result = new Error(error?.message || 'Saf0o request failed')
   result.code = Number.isFinite(error?.code) ? error.code : fallbackCode
   if (error && Object.prototype.hasOwnProperty.call(error, 'data')) result.data = error.data
   return result
@@ -98,7 +98,7 @@ class FrameProvider extends EventEmitter {
       const timer = connectionMessage
         ? setTimeout(() => {
             this.pending.delete(id)
-            reject(providerError({ code: 4900, message: 'Wren connection timed out' }))
+            reject(providerError({ code: 4900, message: 'Saf0o connection timed out' }))
           }, HANDSHAKE_TIMEOUT_MS)
         : undefined
       this.pending.set(id, {
@@ -136,11 +136,11 @@ class FrameProvider extends EventEmitter {
       }
       const disconnected = () => {
         cleanup()
-        reject(providerError({ code: 4900, message: 'Wren disconnected' }))
+        reject(providerError({ code: 4900, message: 'Saf0o disconnected' }))
       }
       const timer = setTimeout(() => {
         cleanup()
-        reject(providerError({ code: 4900, message: 'Wren connection timed out' }))
+        reject(providerError({ code: 4900, message: 'Saf0o connection timed out' }))
       }, 5000)
       this.once('connect', connected)
       this.once('_frameTransportClose', disconnected)
@@ -154,7 +154,7 @@ class FrameProvider extends EventEmitter {
       this.pending.delete(payload.id)
       clearTimeout(pending.timer)
       if (pending.generation !== undefined && pending.generation !== this.connectionGeneration) {
-        return pending.reject(providerError({ code: 4900, message: 'Wren connection changed' }))
+        return pending.reject(providerError({ code: 4900, message: 'Saf0o connection changed' }))
       }
       if (payload.error) return pending.reject(providerError(payload.error))
 
@@ -250,7 +250,7 @@ class FrameProvider extends EventEmitter {
     this.subscriptions.clear()
     this.subscriptionPromises.clear()
     this.emit('_frameTransportClose')
-    const error = providerError({ code: 4900, message: 'Wren disconnected' })
+    const error = providerError({ code: 4900, message: 'Saf0o disconnected' })
     for (const { reject, timer } of this.pending.values()) {
       clearTimeout(timer)
       reject(error)

@@ -145,7 +145,7 @@ function handlePageMessage(event) {
   if (!port) {
     postToPage({
       type: 'rpc',
-      payload: errorResponse(parsed.value.id, 4900, 'Wren Companion unavailable')
+      payload: errorResponse(parsed.value.id, 4900, 'Saf0o Companion unavailable')
     })
     return
   }
@@ -160,7 +160,7 @@ function handlePageMessage(event) {
     port = undefined
     postToPage({
       type: 'rpc',
-      payload: errorResponse(parsed.value.id, 4900, 'Wren Companion unavailable')
+      payload: errorResponse(parsed.value.id, 4900, 'Saf0o Companion unavailable')
     })
     scheduleReconnect()
   }

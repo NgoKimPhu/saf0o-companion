@@ -4,7 +4,7 @@ const test = require('node:test')
 
 const { createProviderInfo, randomUuid } = require('../src/provider-info')
 
-const assertCanonicalWrenIcon = (icon) => {
+const assertCanonicalSaf0oIcon = (icon) => {
   const match = /^data:image\/png;base64,([A-Za-z0-9+/]+={0,2})$/u.exec(icon)
   assert.ok(match)
   const png = Buffer.from(match[1], 'base64')
@@ -23,12 +23,12 @@ test('creates immutable EIP-6963 metadata with a UUIDv4', () => {
 
   assert.deepEqual(info, {
     uuid: '12345678-1234-4234-9234-123456789abc',
-    name: 'Wren',
+    name: 'Saf0o',
     icon: info.icon,
     rdns: 'io.github.ngokimphu.saf0o'
   })
   assert.equal(Object.isFrozen(info), true)
-  assertCanonicalWrenIcon(info.icon)
+  assertCanonicalSaf0oIcon(info.icon)
 })
 
 test('rejects non-v4 identifiers', () => {

@@ -2,7 +2,7 @@ const test = require('node:test')
 const assert = require('node:assert/strict')
 const { installLegacyProvider } = require('../src/legacy-provider')
 
-test('installs Wren only when no legacy provider exists', () => {
+test('installs Saf0o only when no legacy provider exists', () => {
   const target = {}
   const provider = { isFrame: true }
 
@@ -16,7 +16,7 @@ test('installs Wren only when no legacy provider exists', () => {
   })
 })
 
-test('makes Wren the primary legacy provider while retaining a configurable incumbent', () => {
+test('makes Saf0o the primary legacy provider while retaining a configurable incumbent', () => {
   const existing = { isOtherWallet: true }
   const provider = { isFrame: true }
   const target = {}
@@ -31,7 +31,7 @@ test('makes Wren the primary legacy provider while retaining a configurable incu
   assert.deepEqual(provider.providers, [provider, existing])
 })
 
-test('makes Wren primary over an inherited provider while retaining it', () => {
+test('makes Saf0o primary over an inherited provider while retaining it', () => {
   const existing = { isOtherWallet: true }
   const provider = { isFrame: true }
   const target = Object.create({ ethereum: existing })
@@ -42,7 +42,7 @@ test('makes Wren primary over an inherited provider while retaining it', () => {
   assert.deepEqual(provider.providers, [provider, existing])
 })
 
-test('keeps Wren deterministically first in a multi-provider legacy list', () => {
+test('keeps Saf0o deterministically first in a multi-provider legacy list', () => {
   const first = { isOtherWallet: true }
   const second = { isAnotherWallet: true }
   const provider = { isFrame: true }

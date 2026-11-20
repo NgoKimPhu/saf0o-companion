@@ -1,7 +1,7 @@
 const { bytesToBase64Url, fingerprintPublicKey, isPublicKey } = require('./credential-store')
 
 const AUTH_VERSION = 3
-const AUTH_PROTOCOL = 'wren-companion-auth'
+const AUTH_PROTOCOL = 'saf0o-companion-auth'
 const PEER_KIND = 'companion'
 const MAX_AUTH_MESSAGE_BYTES = 16 * 1024
 const MAX_CLOCK_SKEW_MS = 2 * 60 * 1000
@@ -150,7 +150,7 @@ function transcriptObject(challenge, role) {
 
 function authPayload(challenge, role) {
   return new TextEncoder().encode(
-    `wren-companion-auth-v3\0${JSON.stringify(transcriptObject(challenge, role))}`
+    `saf0o-companion-auth-v3\0${JSON.stringify(transcriptObject(challenge, role))}`
   )
 }
 

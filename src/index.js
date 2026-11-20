@@ -23,7 +23,7 @@ const { activeTabSession } = require('./settings-tab-session')
 const { tabSessionState } = require('./tab-session-state')
 
 const frameUrl = (role) =>
-  `ws://127.0.0.1:${globalThis.__WREN_DESKTOP_PORT__}?identity=frame-extension&role=${encodeURIComponent(role)}`
+  `ws://127.0.0.1:${globalThis.__SAF0O_DESKTOP_PORT__}?identity=frame-extension&role=${encodeURIComponent(role)}`
 const MAX_PAGE_SOCKETS = 32
 const MAX_PAGE_SESSIONS = 256
 const MAX_PAGE_SESSIONS_PER_TAB = 8
@@ -245,7 +245,7 @@ function refreshAvailableChains(client = control) {
       const diagnostic = JSON.stringify(failure.chainsError)
       if (diagnostic !== lastChainsErrorDiagnostic) {
         lastChainsErrorDiagnostic = diagnostic
-        console.warn('Wren Companion could not refresh networks', failure.chainsError)
+        console.warn('Saf0o Companion could not refresh networks', failure.chainsError)
       }
       setFrameState(failure)
     }
@@ -429,7 +429,7 @@ chrome.runtime.onConnect.addListener((port) => {
   const ownSettingsPage =
     port.name === 'frame_settings' &&
     port.sender?.id === chrome.runtime.id &&
-    (!port.sender.tab || globalThis.__WREN_QUALIFICATION_POPUP_TAB__ === true) &&
+    (!port.sender.tab || globalThis.__SAF0O_QUALIFICATION_POPUP_TAB__ === true) &&
     typeof port.sender.url === 'string' &&
     port.sender.url.startsWith(chrome.runtime.getURL(''))
   if (!ownSettingsPage) return port.disconnect()

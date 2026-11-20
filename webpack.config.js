@@ -3,12 +3,12 @@ const webpack = require('webpack')
 
 const { buildDirectory, parseDesktopPort } = require('./scripts/build-options.cjs')
 
-const outputPath = buildDirectory(__dirname, process.env.WREN_BUILD_DIRECTORY)
-const desktopPort = parseDesktopPort(process.env.WREN_DESKTOP_PORT)
+const outputPath = buildDirectory(__dirname, process.env.SAF0O_BUILD_DIRECTORY)
+const desktopPort = parseDesktopPort(process.env.SAF0O_DESKTOP_PORT)
 const endpointPlugin = new webpack.DefinePlugin({
-  'globalThis.__WREN_DESKTOP_PORT__': JSON.stringify(desktopPort),
-  'globalThis.__WREN_QUALIFICATION_POPUP_TAB__': JSON.stringify(
-    process.env.WREN_QUALIFICATION_POPUP_TAB === '1'
+  'globalThis.__SAF0O_DESKTOP_PORT__': JSON.stringify(desktopPort),
+  'globalThis.__SAF0O_QUALIFICATION_POPUP_TAB__': JSON.stringify(
+    process.env.SAF0O_QUALIFICATION_POPUP_TAB === '1'
   )
 })
 

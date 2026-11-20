@@ -39,7 +39,7 @@ test('installs the legacy provider before the first EIP-6963 announcement', asyn
     assert.ok(announcedProvider)
     assert.equal(legacyProviderAtAnnouncement, announcedProvider)
     assert.equal(announcedProvider.isMetaMask, true)
-    assert.equal(announcedProvider.isWren, true)
+    assert.equal(announcedProvider.isSaf0o, true)
     assert.equal(announcedProvider.isFrame, true)
     assert.equal(await announcedProvider._metamask.isUnlocked(), true)
   } finally {
@@ -50,7 +50,7 @@ test('installs the legacy provider before the first EIP-6963 announcement', asyn
   }
 })
 
-test('keeps Wren the primary legacy provider across both identity modes', () => {
+test('keeps Saf0o the primary legacy provider across both identity modes', () => {
   const originalWindow = global.window
   const originalDocument = global.document
   const originalCustomEvent = global.CustomEvent
@@ -87,7 +87,7 @@ test('keeps Wren the primary legacy provider across both identity modes', () => 
       assert.equal(global.window.ethereum, announcedProvider)
       assert.deepEqual(announcedProvider.providers, [announcedProvider, incumbent])
       assert.equal(announcedProvider.isMetaMask, true)
-      assert.equal(announcedProvider.isWren === true, !appearAsMetaMask)
+      assert.equal(announcedProvider.isSaf0o === true, !appearAsMetaMask)
     }
   } finally {
     delete require.cache[require.resolve('../src/frame')]

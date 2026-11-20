@@ -1,5 +1,5 @@
 const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/u
-const WREN_ICON = [
+const SAF0O_ICON = [
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAQAElEQVR4nOydCXhUVZbH/6+WpCprpSorIStkMYSwGAiyqRBFFAFx',
   'QVFa7FFmnHHc+5NxGVyGUWntGcdutIf+7BkdtV0aFGFEUREXICBLCC2QEBKSkLWSqqSyV6qqz30QOglJ6lWllldV7/d9sbb7Ynjn',
   '3HPPPefcUwq4gaioqGSZTLYcVmsGOC6eA+LoMc5ms8VzHBcBiRGhe9RK96iBnjTQy3obe5TJyui9j/V6fS1cDAcXwQsduJ3+2Fvp',
@@ -86,8 +86,8 @@ function randomUuid(cryptoApi = globalThis.crypto) {
 
 function createProviderInfo(uuidFactory = randomUuid) {
   const uuid = uuidFactory()
-  if (!UUID_V4.test(uuid)) throw new Error('Unable to create Wren provider UUID')
-  return Object.freeze({ uuid, name: 'Wren', icon: WREN_ICON, rdns: 'io.github.ngokimphu.saf0o' })
+  if (!UUID_V4.test(uuid)) throw new Error('Unable to create Saf0o provider UUID')
+  return Object.freeze({ uuid, name: 'Saf0o', icon: SAF0O_ICON, rdns: 'io.github.ngokimphu.saf0o' })
 }
 
 module.exports = { createProviderInfo, randomUuid }

@@ -21,12 +21,12 @@ npm run package:browsers
 npm run package:verify
 ```
 
-| Purpose                 | File                                         |
-| ----------------------- | -------------------------------------------- |
+| Purpose                 | File                                          |
+| ----------------------- | --------------------------------------------- |
 | Chrome                  | `artifacts/saf0o-companion-0.1.3-chrome.zip`  |
 | Firefox                 | `artifacts/saf0o-companion-0.1.3-firefox.zip` |
 | Mozilla reviewer source | `artifacts/saf0o-companion-0.1.3-source.zip`  |
-| Checksums               | `artifacts/SHA256SUMS`                       |
+| Checksums               | `artifacts/SHA256SUMS`                        |
 
 The source ZIP is for review. Install the ZIP made for each browser.
 

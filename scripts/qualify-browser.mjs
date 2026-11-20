@@ -1502,7 +1502,10 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
       []
     )
     assert.deepEqual(
-      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__saf0o.accountChanges`),
+      await firefoxEvaluate(
+        marionette,
+        `(window.wrappedJSObject || window).__saf0o.accountChanges`
+      ),
       []
     )
     const requestCountBeforeLegacyEnable = desktop.requests.length
@@ -1523,7 +1526,10 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
       'Firefox account grant event'
     )
     assert.deepEqual(
-      await firefoxEvaluate(marionette, `(window.wrappedJSObject || window).__saf0o.accountChanges`),
+      await firefoxEvaluate(
+        marionette,
+        `(window.wrappedJSObject || window).__saf0o.accountChanges`
+      ),
       [enabledAccounts]
     )
     assert.deepEqual(

@@ -11,7 +11,8 @@ test('renames every brand casing', () => {
 
 // Upstream credit, history links and third-party token data must not be rewritten.
 test('keeps upstream credit, links and third-party names verbatim', () => {
-  const kept = 'Jorphex and Wren contributors https://github.com/jorphex/wren getwren.xyz "Wren Staked tGBP"'
+  const kept =
+    'Jorphex and Wren contributors https://github.com/jorphex/wren getwren.xyz "Wren Staked tGBP"'
   assert.equal(rebrand(kept), kept)
 })
 

@@ -66,7 +66,9 @@ if (process.argv[1]?.endsWith('rebrand-saf0o.mjs')) {
 
   // The longer name pushes some lines past the print width; reformat what changed.
   const prettier = 'node_modules/.bin/prettier'
-  const touched = git('diff', '--name-only', '--diff-filter=d', '-z', 'HEAD').split('\0').filter(Boolean)
+  const touched = git('diff', '--name-only', '--diff-filter=d', '-z', 'HEAD')
+    .split('\0')
+    .filter(Boolean)
   if (!existsSync(prettier)) console.warn('rebrand: prettier not installed, skipped formatting')
   else if (touched.length) {
     execFileSync(prettier, ['--write', '--ignore-unknown', '--log-level', 'warn', ...touched], {

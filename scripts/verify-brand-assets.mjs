@@ -64,7 +64,7 @@ assert.deepEqual(
     'uniswap-home.png',
     'saf0o-native-pairing.png',
     'saf0o-request-review.png'
-  ],
+  ].sort(),
   'Store screenshot source inventory contains stale or missing assets'
 )
 

@@ -87,7 +87,7 @@ function randomUuid(cryptoApi = globalThis.crypto) {
 function createProviderInfo(uuidFactory = randomUuid) {
   const uuid = uuidFactory()
   if (!UUID_V4.test(uuid)) throw new Error('Unable to create Wren provider UUID')
-  return Object.freeze({ uuid, name: 'Wren', icon: WREN_ICON, rdns: 'io.github.jorphex.wren' })
+  return Object.freeze({ uuid, name: 'Wren', icon: WREN_ICON, rdns: 'io.github.ngokimphu.saf0o' })
 }
 
 module.exports = { createProviderInfo, randomUuid }

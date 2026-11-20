@@ -993,7 +993,7 @@ class _Settings extends React.Component {
         <ClusterRow>
           <ClusterValue pointerEvents>
             <Download
-              href="https://github.com/jorphex/wren/releases"
+              href="https://github.com/NgoKimPhu/saf0o/releases"
               target="_blank"
               rel="noreferrer"
             >

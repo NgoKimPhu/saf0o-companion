@@ -1,4 +1,4 @@
-const WREN_RDNS = 'io.github.jorphex.wren'
+const WREN_RDNS = 'io.github.ngokimphu.saf0o'
 
 let provider
 let account

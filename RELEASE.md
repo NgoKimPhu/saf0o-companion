@@ -41,7 +41,7 @@ Keep test windows off the active desktop.
 6. Check delayed connection replies and retries. Old attempts must not change
    the new attempt or its network.
 
-Follow the paired [desktop checklist](https://github.com/jorphex/wren/blob/main/QUALIFICATION.md)
+Follow the paired [desktop checklist](https://github.com/NgoKimPhu/saf0o/blob/main/QUALIFICATION.md)
 for signing and device tests.
 
 ## Create the draft

@@ -4,7 +4,7 @@
   "manifest_version": 3,
   "minimum_chrome_version": "116",
   "description": "Connects Ethereum apps in your browser to the Wren desktop wallet.",
-  "homepage_url": "https://github.com/jorphex/wren-companion",
+  "homepage_url": "https://github.com/NgoKimPhu/saf0o-companion",
   "background": {
     "service_worker": "index.js"
   },
@@ -35,7 +35,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "{645ed7c6-d25f-4256-b29a-10e1e0633cf5}",
+      "id": "{a9f122d8-e442-45ba-a388-12f783c74397}",
       "strict_min_version": "142.0",
       "data_collection_permissions": {
         "required": [

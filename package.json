@@ -4,7 +4,7 @@
   "packageManager": "npm@11.12.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jorphex/wren-companion.git"
+    "url": "git+https://github.com/NgoKimPhu/saf0o-companion.git"
   },
   "description": "Connects Ethereum apps in your browser to the Wren desktop wallet",
   "main": "src",

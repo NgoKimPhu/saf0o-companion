@@ -100,7 +100,7 @@ if (manifest.content_security_policy?.extension_pages !== expectedExtensionCsp) 
   throw new Error('Extension CSP differs from the reviewed loopback-only policy')
 }
 if (
-  manifest.browser_specific_settings?.gecko?.id !== '{645ed7c6-d25f-4256-b29a-10e1e0633cf5}' ||
+  manifest.browser_specific_settings?.gecko?.id !== '{a9f122d8-e442-45ba-a388-12f783c74397}' ||
   manifest.browser_specific_settings?.gecko?.strict_min_version !== '142.0' ||
   JSON.stringify(manifest.browser_specific_settings?.gecko?.data_collection_permissions) !==
     JSON.stringify({

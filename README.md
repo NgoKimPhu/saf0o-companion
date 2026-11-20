@@ -1,7 +1,7 @@
 # Wren Companion
 
 Wren Companion connects Ethereum apps in your browser to the
-[Wren](https://github.com/jorphex/wren) desktop wallet. It carries each page's
+[Wren](https://github.com/NgoKimPhu/saf0o) desktop wallet. It carries each page's
 requests to Wren, where you review access, approvals, and signatures.
 
 ## Install and pair
@@ -24,7 +24,7 @@ Companion release.
 ## Build and test
 
 ```bash
-git clone https://github.com/jorphex/wren-companion
+git clone https://github.com/NgoKimPhu/saf0o-companion
 cd wren-companion
 nvm install
 nvm use
@@ -42,7 +42,7 @@ Load a local build in a disposable browser profile:
   Firefox restarts.
 
 Run `npm run qualify:serve` for the local test page. Follow Wren's
-[qualification checklist](https://github.com/jorphex/wren/blob/main/QUALIFICATION.md)
+[qualification checklist](https://github.com/NgoKimPhu/saf0o/blob/main/QUALIFICATION.md)
 with test accounts.
 
 For release archives, use a clean commit:
@@ -58,7 +58,7 @@ separate packages. See [Release](RELEASE.md) and [Store submission](STORE_SUBMIS
 ## Developer reference
 
 Companion provides EIP-1193 and announces Wren through EIP-6963 as
-`io.github.jorphex.wren`. Legacy `frame_*` labels and `isFrame` remain for
+`io.github.ngokimphu.saf0o`. Legacy `frame_*` labels and `isFrame` remain for
 compatibility.
 
 Interface text uses Recursive. Technical values use the browser's monospace

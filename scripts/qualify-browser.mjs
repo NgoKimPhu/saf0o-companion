@@ -192,7 +192,7 @@ function report(value) {
   fetch('/report', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(value) });
 }
 window.addEventListener('eip6963:announceProvider', async (event) => {
-  if (event.detail?.info?.rdns !== 'io.github.jorphex.wren') return;
+  if (event.detail?.info?.rdns !== 'io.github.ngokimphu.saf0o') return;
   const info = event.detail.info;
   globalThis.__wren.announcements.push({ name: info.name, rdns: info.rdns, uuid: info.uuid });
   if (globalThis.__wren.provider !== event.detail.provider) {
@@ -898,7 +898,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
         kind: 'top',
         type: 'ready',
         chainId: '0x1',
-        info: { name: 'Wren', rdns: 'io.github.jorphex.wren' }
+        info: { name: 'Wren', rdns: 'io.github.ngokimphu.saf0o' }
       }
     )
     assert.equal(frame.reports.find(({ type }) => type === 'ready')?.chainId, '0x2')
@@ -1209,7 +1209,7 @@ async function qualifyChrome(root, extension, desktop, top, frame) {
         await page.evaluate(`new Promise((resolve, reject) => {
           const timeout = setTimeout(() => reject(new Error('Wren provider announcement timed out')), 10000);
           const onProvider = async (event) => {
-            if (event.detail?.info?.rdns !== 'io.github.jorphex.wren') return;
+            if (event.detail?.info?.rdns !== 'io.github.ngokimphu.saf0o') return;
             window.removeEventListener('eip6963:announceProvider', onProvider);
             clearTimeout(timeout);
             try {
@@ -1404,7 +1404,7 @@ async function qualifyFirefox(root, extension, desktop, top, frame) {
       path: extension,
       temporary: true
     })
-    assert.equal(installed.value, '{645ed7c6-d25f-4256-b29a-10e1e0633cf5}')
+    assert.equal(installed.value, '{a9f122d8-e442-45ba-a388-12f783c74397}')
     await marionette.request('WebDriver:Navigate', { url: `${top.origin}/` })
     const currentHandle = await marionette.request('WebDriver:GetWindowHandle')
     const topHandle = currentHandle.value || currentHandle
@@ -1827,7 +1827,7 @@ async function qualifyFirefoxPackagedCore(root, extension, desktop, top, frame) 
       path: extension,
       temporary: true
     })
-    assert.equal(installed.value, '{645ed7c6-d25f-4256-b29a-10e1e0633cf5}')
+    assert.equal(installed.value, '{a9f122d8-e442-45ba-a388-12f783c74397}')
     await waitFor(
       () => desktop.identity('firefox', 'control'),
       'Firefox packaged background control authentication',

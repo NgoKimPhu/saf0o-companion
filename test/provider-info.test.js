@@ -25,7 +25,7 @@ test('creates immutable EIP-6963 metadata with a UUIDv4', () => {
     uuid: '12345678-1234-4234-9234-123456789abc',
     name: 'Wren',
     icon: info.icon,
-    rdns: 'io.github.jorphex.wren'
+    rdns: 'io.github.ngokimphu.saf0o'
   })
   assert.equal(Object.isFrozen(info), true)
   assertCanonicalWrenIcon(info.icon)

@@ -49,11 +49,11 @@ Wren desktop is required. Companion is based on the GPL-3.0 Frame extension
 and is maintained separately from Frame Labs. It has no telemetry,
 advertising, cloud account, developer-operated service, or remote executable code.
 
-**Homepage:** https://github.com/jorphex/wren-companion
+**Homepage:** https://github.com/NgoKimPhu/saf0o-companion
 
-**Support:** https://github.com/jorphex/wren-companion/issues
+**Support:** https://github.com/NgoKimPhu/saf0o-companion/issues
 
-**Privacy:** https://github.com/jorphex/wren-companion/blob/v0.1.3/PRIVACY.md
+**Privacy:** https://github.com/NgoKimPhu/saf0o-companion/blob/v0.1.3/PRIVACY.md
 
 **License:** GNU General Public License v3.0 only
 

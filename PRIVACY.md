@@ -66,4 +66,4 @@ not sold, made available for human review, or used for advertising,
 creditworthiness, lending, or unrelated purposes.
 
 For a private privacy report, use [Security](SECURITY.md). General questions can
-use the [issue tracker](https://github.com/jorphex/wren-companion/issues).
+use the [issue tracker](https://github.com/NgoKimPhu/saf0o-companion/issues).

@@ -1,7 +1,7 @@
 # Security Policy
 
 Security fixes target the latest published
-[Wren Companion release](https://github.com/jorphex/wren-companion/releases).
+[Wren Companion release](https://github.com/NgoKimPhu/saf0o-companion/releases).
 Local builds and development branches are test versions. See [Privacy](PRIVACY.md)
 for data handling and retention.
 

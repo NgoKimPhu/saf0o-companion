@@ -3,11 +3,18 @@
 // and paths (git mv). Idempotent. On an upstream rebase: drop the generated commit, rebase,
 // then re-run this script instead of merging the rename. Usage: node scripts/rebrand-saf0o.mjs
 import { execFileSync } from 'node:child_process'
-import { readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 
 const SELF = 'scripts/rebrand-saf0o.mjs'
 // History and third-party records keep the upstream name.
-const SKIP_FILE = [/^CHANGELOG\.md$/, /^release-notes\//, /^pnpm-lock\.yaml$/, /^PATCHES\.md$/, /^NOTES\.md$/, /^test\/scripts\/rebrand-saf0o\.test\.mjs$/]
+const SKIP_FILE = [
+  /^CHANGELOG\.md$/,
+  /^release-notes\//,
+  /^pnpm-lock\.yaml$/,
+  /^PATCHES\.md$/,
+  /^NOTES\.md$/,
+  /^test\/scripts\/rebrand-saf0o\.test\.mjs$/
+]
 // Strings kept verbatim: upstream credit/links, third-party token names, upstream store listings.
 const KEEP = [
   'jorphex/wren',
@@ -23,11 +30,11 @@ export const rebrand = (text) => {
   const kept = []
   let out = text
   KEEP.forEach((k, i) => {
-    out = out.split(k).join(`\u0000${i}\u0000`)
+    out = out.split(k).join(`\uE000${i}\uE000`)
     kept[i] = k
   })
   out = out.replace(/Wren|wren|WREN/g, (m) => MAP[m])
-  return out.replace(/\u0000(\d+)\u0000/g, (_, i) => kept[Number(i)])
+  return out.replace(/\uE000(\d+)\uE000/g, (_, i) => kept[Number(i)])
 }
 
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8' })
@@ -56,4 +63,14 @@ if (process.argv[1]?.endsWith('rebrand-saf0o.mjs')) {
     moved++
   }
   console.log(`rebrand: ${changed} files rewritten, ${moved} paths moved`)
+
+  // The longer name pushes some lines past the print width; reformat what changed.
+  const prettier = 'node_modules/.bin/prettier'
+  const touched = git('diff', '--name-only', '--diff-filter=d', '-z', 'HEAD').split('\0').filter(Boolean)
+  if (!existsSync(prettier)) console.warn('rebrand: prettier not installed, skipped formatting')
+  else if (touched.length) {
+    execFileSync(prettier, ['--write', '--ignore-unknown', '--log-level', 'warn', ...touched], {
+      stdio: 'inherit'
+    })
+  }
 }

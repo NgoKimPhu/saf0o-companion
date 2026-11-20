@@ -5,6 +5,7 @@
   "minimum_chrome_version": "116",
   "description": "Connects Ethereum apps in your browser to the Saf0o desktop wallet.",
   "homepage_url": "https://github.com/NgoKimPhu/saf0o-companion",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3bPjdx9Ijj4rYRd8KThkzOBNlNpazsGfM7btMTzEL5MjuEcSIe7gvf0jlUlSnGnGRrZrS1WI5+ZWK6JfNJK/WtY79dIYyLEVsBedh3TuOj8jyEAkfXUf51qxtpuBa7sQS+kZBWfK82slLTH4DidClft3JTcG/9GvZTWB6eWycQuIDSNnhc4up7o7J6hInWIZncUdgL3PsYG7lpfxlHMaf6bNztdz+lVgYcJRqKyEzRp433EftBqxej4UinUVglq8foT2iPbTFXrs0IEqsX4AXgkKKmOMJUU4hELyrhQqjn0f4hKn8tMVMuocuv2gRL65Wup7fs3S54GTU6joVKgTEQIDAQAB",
   "background": {
     "service_worker": "index.js"
   },

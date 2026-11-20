@@ -4,8 +4,10 @@ export function createFirefoxManifest(manifest) {
     throw new Error('Chrome manifest has an incompatible background declaration')
   }
 
+  // `key` pins the Chromium extension id; Firefox does not support it.
+  const { key: _key, ...rest } = manifest
   return {
-    ...manifest,
+    ...rest,
     background: { scripts: [serviceWorker] }
   }
 }

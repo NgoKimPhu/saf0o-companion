@@ -59,5 +59,6 @@ The build runs offline.
 
 - One topic per commit, subject prefix `saf0o: `. Each commit carries a test that encodes why.
 - Push only `main`, and only with the owner's approval.
-- Local builds for the owner replace the previous one in place: the `.xpi` goes to `%USERPROFILE%\saf0o-companion.xpi`.
+- Local builds for the owner replace the previous one in place: the `.xpi` goes to
+  `%USERPROFILE%\Saf0o\saf0o-companion.xpi`, next to the desktop app.
   Keep an old build only when asked.
